@@ -8,22 +8,25 @@ __pycache__/
 # Mac
 .DS_Store
 
-# Project
+# DBs and backups (local only)
+data/
+backups/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.pid
+
+# Artifacts
 dist/
 old/
-bot.log
-*.sqlite
-*.db
-bot.log
-*.log
-# ארטיפקטים ישנים/זיפים/טמפ
-*.zip
-*.pid
-*.db*
+snapshots/
+last_snapshot.html
+
+# Vim/Swap/Temp
 *.sw?
 *.sw??
-_patch_work_*/
-tusbot_v*/
-tustus_*/
-_snapshots/
-snapshots/
+*.old
+
+# macOS
+.DS_Store
