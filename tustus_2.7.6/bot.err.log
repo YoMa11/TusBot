@@ -1,0 +1,294 @@
+2025-09-03 00:28:43,084 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:29:43,130 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:30:43,109 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:31:43,102 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:32:43,082 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:33:43,138 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:34:43,123 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:35:43,067 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:36:43,128 - ERROR - run_monitor tick failed
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/app.py", line 28, in _job_monitor
+    await lg.run_monitor(conn, context.application)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 171, in run_monitor
+    return monitor_job(conn, app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 151, in monitor_job
+    items = scrape_items(resp.text)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 141, in scrape_items
+    items.append(_parse_item(div))
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 83, in _parse_item
+    out_from_date  = _text(go.select_one(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/logic.py", line 44, in _text
+    return re.sub(r"\s+", " ", (n.get_text(strip=True) if n else "")).strip()
+                                ^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/bs4/element.py", line 2902, in __getattr__
+    raise AttributeError(
+        f"""ResultSet object has no attribute "{key}". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?"""
+    )
+AttributeError: ResultSet object has no attribute "get_text". You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
+2025-09-03 00:59:38,129 - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 158, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 36, in handle_start
+    text, km = _build_main_screen(conn, selected="*")
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 28, in _build_main_screen
+    km = build_destinations_keyboard(selected or "*")
+TypeError: build_destinations_keyboard() missing 1 required positional argument: 'selected'
+2025-09-03 00:59:44,952 - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 158, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 36, in handle_start
+    text, km = _build_main_screen(conn, selected="*")
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 28, in _build_main_screen
+    km = build_destinations_keyboard(selected or "*")
+TypeError: build_destinations_keyboard() missing 1 required positional argument: 'selected'
+2025-09-03 00:59:45,025 - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 158, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 36, in handle_start
+    text, km = _build_main_screen(conn, selected="*")
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 28, in _build_main_screen
+    km = build_destinations_keyboard(selected or "*")
+TypeError: build_destinations_keyboard() missing 1 required positional argument: 'selected'
+2025-09-03 00:59:45,098 - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 158, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 36, in handle_start
+    text, km = _build_main_screen(conn, selected="*")
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 28, in _build_main_screen
+    km = build_destinations_keyboard(selected or "*")
+TypeError: build_destinations_keyboard() missing 1 required positional argument: 'selected'
+2025-09-03 00:59:46,009 - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 158, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 36, in handle_start
+    text, km = _build_main_screen(conn, selected="*")
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 28, in _build_main_screen
+    km = build_destinations_keyboard(selected or "*")
+TypeError: build_destinations_keyboard() missing 1 required positional argument: 'selected'
+2025-09-03 01:00:14,103 - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 158, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 36, in handle_start
+    text, km = _build_main_screen(conn, selected="*")
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 28, in _build_main_screen
+    km = build_destinations_keyboard(selected or "*")
+TypeError: build_destinations_keyboard() missing 1 required positional argument: 'selected'
+2025-09-03 01:03:21,466 - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/.venv/lib/python3.13/site-packages/telegram/ext/_handlers/basehandler.py", line 158, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 36, in handle_start
+    text, km = _build_main_screen(conn, selected="*")
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/handlers.py", line 28, in _build_main_screen
+    km = build_destinations_keyboard(conn, selected or "*")
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/telegram_view.py", line 42, in build_destinations_keyboard
+    grouped = group_by_country(rows)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.6/telegram_view.py", line 24, in group_by_country
+    for city, country, _ in rows:
+                            ^^^^
+TypeError: 'sqlite3.Connection' object is not iterable

@@ -1,9 +1,8 @@
-# logic.py
 from __future__ import annotations
 from typing import List, Dict, Iterable, Tuple, Optional
 import re
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, ResultSet
 import config
 import db
 
@@ -80,10 +79,10 @@ def _parse_item(div) -> Dict[str, Optional[str]]:
     go = div.select_one(".flight_go")
     out_from_city  = _text(go.select_one(".from .text-gray")) if go else None
     out_from_time  = _text(go.select_one(".from .flight_hourTime")) if go else None
-    out_from_date  = _text(go.select(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
+    out_from_date  = _text(go.select_one(".from .text-gray"))[1:] if go else None  # אם יש פעמיים text-gray
     out_to_city    = _text(go.select_one(".to .text-gray")) if go else None
     out_to_time    = _text(go.select_one(".to .flight_hourTime")) if go else None
-    out_to_date    = _text(go.select(".to .text-gray"))[1:] if go else None
+    out_to_date    = _text(go.select_one(".to .text-gray"))[1:] if go else None
     out_duration   = _text(go.select_one(".fligth .text-gray")) if go else None
 
     # פרטי חזור
@@ -169,3 +168,66 @@ def monitor_job(conn, app=None) -> Tuple[int, int]:
 async def run_monitor(conn, app=None):
     # כדי להימנע מבעיות thread, כאן מריצים סינכרוני; הקריאה מה־app צריכה להזרים conn מאותו thread.
     return monitor_job(conn, app)
+
+
+def _text(n):
+    """Accept element OR list/ResultSet; return normalized text."""
+    import re
+    try:
+        from bs4.element import ResultSet as _RS
+    except Exception:
+        _RS = tuple()
+    if not n:
+        return ""
+    if isinstance(n, (list, _RS)):
+        parts = [el.get_text(strip=True) for el in n if getattr(el, 'get_text', None)]
+        return re.sub(r"\s+", " ", " ".join(parts)).strip()
+    return re.sub(r"\s+", " ", n.get_text(strip=True)).strip()
+
+
+def get_dest_summary(conn, limit=50):
+    """Return [(destination, count)], total_count for current flights."""
+    cur = conn.cursor()
+    cur.execute("""        SELECT destination, COUNT(*) AS cnt
+        FROM flights
+        GROUP BY destination
+        ORDER BY cnt DESC, destination ASC
+        LIMIT ?
+    """, (limit,))
+    rows = cur.fetchall()
+    cur.execute("SELECT COUNT(*) FROM flights")
+    total = cur.fetchone()[0]
+    return rows, total
+
+
+def get_dest_rows_for_keyboard(conn):
+    """
+    החזרת נתונים למקלדת היעדים בפורמט:
+        [(city:str, country:str, count:int), ...]
+    משתמש בעמודות flights.dest_city ו-flights.dest_country אם קיימות; אחרת נופל ל-destination.
+    """
+    cur = conn.cursor()
+    # נעדיף עיר/מדינה אם יש, אחרת נתרגם מ-destination לשדה city (ונשאיר country ריק)
+    try:
+        cur.execute("""
+            SELECT
+                COALESCE(NULLIF(TRIM(dest_city), ''), COALESCE(NULLIF(TRIM(destination), ''), 'יעד לא ידוע')) AS city,
+                COALESCE(NULLIF(TRIM(dest_country), ''), '') AS country,
+                COUNT(*) AS cnt
+            FROM flights
+            GROUP BY city, country
+            ORDER BY country ASC, city ASC
+        """)
+    except Exception:
+        # Fallback לגירסאות ישנות
+        cur.execute("""
+            SELECT
+                COALESCE(NULLIF(TRIM(destination), ''), 'יעד לא ידוע') AS city,
+                '' AS country,
+                COUNT(*) AS cnt
+            FROM flights
+            GROUP BY city
+            ORDER BY city ASC
+        """)
+    return cur.fetchall()
+
