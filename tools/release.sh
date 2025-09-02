@@ -16,7 +16,7 @@ fi
 # (אם יש בדיקות/לינטרים - אפשר להריץ כאן)
 
 # העלאת גרסה + עידכון changelog
-NEW_VER="$("$ROOT/tools/bump_version.py" "$KIND")"
+NEW_VER="$(python3 "$ROOT/tools/bump_version.py" "$KIND")"
 TAG="v$NEW_VER"
 
 # קומיט של VERSION+CHANGELOG ותגית

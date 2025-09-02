@@ -16,3 +16,14 @@ bot.log
 *.db
 bot.log
 *.log
+# ארטיפקטים ישנים/זיפים/טמפ
+*.zip
+*.pid
+*.db*
+*.sw?
+*.sw??
+_patch_work_*/
+tusbot_v*/
+tustus_*/
+_snapshots/
+snapshots/
