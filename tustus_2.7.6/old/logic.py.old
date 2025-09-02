@@ -1,0 +1,229 @@
+from __future__ import annotations
+import logging, re, time
+from typing import Dict, List, Tuple
+import sqlite3
+import requests
+from bs4 import BeautifulSoup
+import db
+import config
+
+logger = logging.getLogger(__name__)
+
+# ---------- כלי עזר ----------
+_space_re = re.compile(r"\s+")
+digits_re = re.compile(r"(\d+)")
+price_re = re.compile(r"([₪$]|USD)?\s*([0-9]+(?:\.[0-9]+)?)")
+
+def _clean(s: str | None) -> str:
+    return _space_re.sub(" ", s or "").strip()
+
+def _take_int(text: str | None) -> int | None:
+    if not text: return None
+    m = digits_re.search(text.replace(",", ""))
+    return int(m.group(1)) if m else None
+
+def _parse_price(text: str | None) -> tuple[str, float] | tuple[str, None]:
+    t = (text or "").replace("\xa0", " ").strip()
+    m = price_re.search(t)
+    if not m:
+        # נסיון גס עם ₪/ש"ח
+        if "₪" in t or "שח" in t or "ש\"ח" in t or "ש״ח" in t:
+            n = _take_int(t)
+            return ("₪", float(n) if n is not None else None)
+        return ("", None)
+    sym, val = m.group(1) or "", m.group(2)
+    try:
+        return (sym, float(val))
+    except Exception:
+        return (sym, None)
+
+def _text(el) -> str:
+    return _clean(el.get_text(" ", strip=True)) if el else ""
+
+def _first(sel_list):
+    return sel_list[0] if sel_list else None
+
+# ---------- מיגרציה זריזה (מוסיפה עמודות חסרות) ----------
+REQUIRED_COLS = {
+    "item_id":"TEXT", "selapp_item":"TEXT", "destination":"TEXT",
+    "city":"TEXT", "country":"TEXT",
+    "price":"REAL", "currency":"TEXT", "price_raw":"TEXT",
+    "url":"TEXT", "img_url":"TEXT", "last_spots":"INTEGER",
+    "depart_city":"TEXT","depart_time":"TEXT","depart_date":"TEXT",
+    "arrive_city":"TEXT","arrive_time":"TEXT","arrive_date":"TEXT",
+    "return_depart_city":"TEXT","return_depart_time":"TEXT","return_depart_date":"TEXT",
+    "return_arrive_city":"TEXT","return_arrive_time":"TEXT","return_arrive_date":"TEXT",
+    "duration_go":"TEXT","duration_back":"TEXT",
+    "ga_currency":"TEXT","ga_brand":"TEXT","ga_category":"TEXT",
+    "ga_category2":"TEXT","ga_category4":"TEXT",
+    "updated_at":"TIMESTAMP", "last_seen":"TIMESTAMP"
+}
+
+def _ensure_columns(conn: sqlite3.Connection) -> None:
+    cols = {r["name"] for r in conn.execute("PRAGMA table_info(flights)")}
+
+    # אם הטבלה לא קיימת – db.ensure_schema כבר ייצור; כאן נגן על חסרים
+    for col, ctype in REQUIRED_COLS.items():
+        if col not in cols:
+            # הימנעות מקונפליקטים בטיפוס ברירת מחדל
+            if col in ("updated_at","last_seen"):
+                conn.execute(f"ALTER TABLE flights ADD COLUMN {col} TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+            elif col in ("price","last_spots"):
+                conn.execute(f"ALTER TABLE flights ADD COLUMN {col} {ctype}")
+            else:
+                conn.execute(f"ALTER TABLE flights ADD COLUMN {col} {ctype}")
+    conn.commit()
+
+# ---------- Parser עיקרי ----------
+def _parse_card(div) -> Dict:
+    # מזהים ו-GA
+    item_id     = div.get("ite_item") or div.get("data_ga_item_id")
+    selapp_item = div.get("ite_selappitem")
+    ga_curr     = div.get("data_ga_currency")
+    ga_brand    = div.get("data_ga_item_brand")
+    ga_cat      = div.get("data_ga_item_category")
+    ga_cat2     = div.get("data_ga_item_category2")
+    ga_cat4     = div.get("data_ga_item_category4")
+
+    # יעד, מחיר, תמונה
+    name_el = _first(div.select(".show_item_name"))
+    destination = _text(name_el)
+
+    price_el = _first(div.select(".show_item_total_price"))
+    price_raw = _text(price_el)
+    currency, price = _parse_price(price_raw)
+
+    img_el = _first(div.select(".show_item_img img"))
+    img_url = img_el.get("src") if img_el else None
+
+    # מקומות פנויים (אם קיים .spcial_message_bottom)
+    spots_el = _first(div.select(".spcial_message_bottom"))
+    last_spots = _take_int(_text(spots_el))
+
+    # פרטי הלוך
+    go = _first(div.select(".flight_go"))
+    depart_city = depart_time = depart_date = ""
+    arrive_city = arrive_time = arrive_date = ""
+    duration_go = ""
+
+    if go:
+        g_from = _first(go.select(".from"))
+        g_to   = _first(go.select(".to"))
+        g_mid  = _first(go.select(".fligth"))
+        if g_from:
+            depart_city = _text(_first(g_from.select(".text-gray")))
+            depart_time = _text(_first(g_from.select(".flight_hourTime")))
+            # השורה השלישית – תאריך
+            g_from_all = g_from.select(".text-gray")
+            if len(g_from_all) >= 2:
+                depart_date = _text(g_from_all[1])
+        if g_to:
+            t_gray = g_to.select(".text-gray")
+            if t_gray:
+                arrive_city = _text(t_gray[0])
+            arrive_time = _text(_first(g_to.select(".flight_hourTime")))
+            if len(t_gray) >= 2:
+                arrive_date = _text(t_gray[1])
+        if g_mid:
+            duration_go = _text(_first(g_mid.select(".text-gray")))
+
+    # פרטי חזור
+    back = _first(div.select(".flight_back"))
+    return_depart_city = return_depart_time = return_depart_date = ""
+    return_arrive_city = return_arrive_time = return_arrive_date = ""
+    duration_back = ""
+
+    if back:
+        b_from = _first(back.select(".from"))
+        b_to   = _first(back.select(".to"))
+        b_mid  = _first(back.select(".fligth"))
+        if b_from:
+            b_from_gray = b_from.select(".text-gray")
+            if b_from_gray:
+                return_depart_city = _text(b_from_gray[0])
+            return_depart_time = _text(_first(b_from.select(".flight_hourTime")))
+            if len(b_from_gray) >= 2:
+                return_depart_date = _text(b_from_gray[1])
+        if b_to:
+            b_to_gray = b_to.select(".text-gray")
+            if b_to_gray:
+                return_arrive_city = _text(b_to_gray[0])
+            return_arrive_time = _text(_first(b_to.select(".flight_hourTime")))
+            if len(b_to_gray) >= 2:
+                return_arrive_date = _text(b_to_gray[1])
+        if b_mid:
+            duration_back = _text(_first(b_mid.select(".text-gray")))
+
+    # יעד “נקי” (עיר/מדינה) מתוך con_desc אם קיים
+    con_desc = div.get("con_desc") or ""
+    city = country = ""
+    if " - " in con_desc:
+        parts = [p.strip() for p in con_desc.split(" - ", 1)]
+        if parts:
+            city = parts[0]
+            if len(parts) > 1:
+                country = parts[1]
+
+    row = {
+        "item_id": item_id,
+        "selapp_item": selapp_item,
+        "destination": destination,
+        "city": city,
+        "country": country,
+        "price": price,
+        "currency": currency or (ga_curr if ga_curr in ("USD","₪") else ""),
+        "price_raw": price_raw,
+        "url": config.URL,
+        "img_url": img_url,
+        "last_spots": last_spots,
+        "depart_city": depart_city, "depart_time": depart_time, "depart_date": depart_date,
+        "arrive_city": arrive_city, "arrive_time": arrive_time, "arrive_date": arrive_date,
+        "return_depart_city": return_depart_city, "return_depart_time": return_depart_time, "return_depart_date": return_depart_date,
+        "return_arrive_city": return_arrive_city, "return_arrive_time": return_arrive_time, "return_arrive_date": return_arrive_date,
+        "duration_go": duration_go, "duration_back": duration_back,
+        "ga_currency": ga_curr, "ga_brand": ga_brand, "ga_category": ga_cat,
+        "ga_category2": ga_cat2, "ga_category4": ga_cat4,
+    }
+    return row
+
+# ---------- משיכה ושמירה ----------
+def _fetch_cards_html() -> str:
+    headers = {
+        "User-Agent": config.USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    }
+    r = requests.get(config.URL, headers=headers, timeout=config.REQUEST_TIMEOUT)
+    r.raise_for_status()
+    return r.text
+
+def _parse_all(html: str) -> List[Dict]:
+    soup = BeautifulSoup(html, "lxml")
+    cards = soup.select("div.show_item")
+    items: List[Dict] = []
+    for div in cards:
+        try:
+            items.append(_parse_card(div))
+        except Exception as e:
+            logger.exception("parse card failed: %s", e)
+    return items
+
+def monitor_job(conn: sqlite3.Connection, app=None) -> Tuple[int, int, int]:
+    """משיכת HTML, פרסינג ושמירה ל-DB. מחזיר (מס’ קלפים, insert, update)."""
+    start = time.time()
+    html = _fetch_cards_html()
+    items = _parse_all(html)
+
+    _ensure_columns(conn)
+    ins, upd = db.upsert_items(conn, items)
+
+    took = int((time.time() - start)*1000)
+    logger.info("monitor_job: parsed=%d inserted=%d updated=%d took=%dms", len(items), ins, upd, took)
+    return (len(items), ins, upd)
+
+async def run_monitor(conn: sqlite3.Connection, app=None):
+    # הרצה thread-safe ב־to_thread לא נדרשת אם app כבר קורא מתוך job thread.
+    # כאן נשאיר סינכרוני כדי לעבוד על אותו חיבור.
+    try:
+        monitor_job(conn, app)
+    except Exception as e:
+        logger.exception("run_monitor failed: %s", e)

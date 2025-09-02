@@ -1,0 +1,675 @@
+2025-08-30 03:48:08,646 - INFO - 📝 logging to ./bot.log
+2025-08-30 03:48:08,646 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 03:48:08,646 - INFO - ✅ DB schema ensured
+2025-08-30 03:48:08,647 - INFO - ✅ DB schema ensured
+2025-08-30 03:48:08,647 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 03:48:08,647 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 03:48:08,907 - INFO - Scheduler started
+2025-08-30 03:48:08,908 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 03:48:11,763 - INFO - show_item cards parsed: 102
+2025-08-30 03:48:11,772 - INFO - DB upsert (show_item): inserted=102, updated=0
+2025-08-30 03:51:14,735 - INFO - show_item cards parsed: 102
+2025-08-30 03:51:14,743 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 03:54:39,596 - INFO - show_item cards parsed: 102
+2025-08-30 03:54:39,604 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 03:58:04,436 - INFO - show_item cards parsed: 102
+2025-08-30 03:58:04,448 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:03:32,369 - INFO - show_item cards parsed: 102
+2025-08-30 04:03:32,384 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:07:24,465 - INFO - show_item cards parsed: 102
+2025-08-30 04:07:24,477 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:10:28,057 - INFO - show_item cards parsed: 102
+2025-08-30 04:10:28,072 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:14:12,801 - INFO - show_item cards parsed: 102
+2025-08-30 04:14:12,817 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:17:15,772 - INFO - show_item cards parsed: 102
+2025-08-30 04:17:15,786 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:20:18,704 - INFO - show_item cards parsed: 102
+2025-08-30 04:20:18,717 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:23:21,601 - INFO - show_item cards parsed: 102
+2025-08-30 04:23:21,615 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:26:24,533 - INFO - show_item cards parsed: 102
+2025-08-30 04:26:24,546 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:29:27,484 - INFO - show_item cards parsed: 102
+2025-08-30 04:29:27,499 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:32:30,447 - INFO - show_item cards parsed: 102
+2025-08-30 04:32:30,462 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:35:33,360 - INFO - show_item cards parsed: 102
+2025-08-30 04:35:33,375 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:38:36,320 - INFO - show_item cards parsed: 102
+2025-08-30 04:38:36,335 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:41:39,363 - INFO - show_item cards parsed: 102
+2025-08-30 04:41:39,377 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:44:42,250 - INFO - show_item cards parsed: 102
+2025-08-30 04:44:42,264 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:47:45,226 - INFO - show_item cards parsed: 102
+2025-08-30 04:47:45,240 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:50:48,124 - INFO - show_item cards parsed: 102
+2025-08-30 04:50:48,139 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:53:51,114 - INFO - show_item cards parsed: 102
+2025-08-30 04:53:51,128 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:56:53,932 - INFO - show_item cards parsed: 102
+2025-08-30 04:56:53,947 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 04:59:56,744 - INFO - show_item cards parsed: 102
+2025-08-30 04:59:56,759 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:02:59,578 - INFO - show_item cards parsed: 102
+2025-08-30 05:02:59,593 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:06:02,437 - INFO - show_item cards parsed: 102
+2025-08-30 05:06:02,450 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:09:05,297 - INFO - show_item cards parsed: 102
+2025-08-30 05:09:05,311 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:12:08,090 - INFO - show_item cards parsed: 102
+2025-08-30 05:12:08,104 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:15:10,865 - INFO - show_item cards parsed: 102
+2025-08-30 05:15:10,879 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:19:13,372 - INFO - show_item cards parsed: 102
+2025-08-30 05:19:13,385 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:22:16,155 - INFO - show_item cards parsed: 102
+2025-08-30 05:22:16,168 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:25:19,016 - INFO - show_item cards parsed: 102
+2025-08-30 05:25:19,027 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:28:21,836 - INFO - show_item cards parsed: 102
+2025-08-30 05:28:21,850 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:31:24,647 - INFO - show_item cards parsed: 102
+2025-08-30 05:31:24,661 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:34:27,446 - INFO - show_item cards parsed: 102
+2025-08-30 05:34:27,458 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:37:30,261 - INFO - show_item cards parsed: 102
+2025-08-30 05:37:30,276 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:40:33,160 - INFO - show_item cards parsed: 102
+2025-08-30 05:40:33,174 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:43:35,971 - INFO - show_item cards parsed: 102
+2025-08-30 05:43:35,985 - INFO - DB upsert (show_item): inserted=0, updated=102
+2025-08-30 05:46:39,098 - INFO - show_item cards parsed: 96
+2025-08-30 05:46:39,109 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 05:49:41,896 - INFO - show_item cards parsed: 96
+2025-08-30 05:49:41,910 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 05:52:44,693 - INFO - show_item cards parsed: 96
+2025-08-30 05:52:44,708 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 05:55:47,496 - INFO - show_item cards parsed: 96
+2025-08-30 05:55:47,508 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 05:58:50,308 - INFO - show_item cards parsed: 96
+2025-08-30 05:58:50,322 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:01:53,055 - INFO - show_item cards parsed: 96
+2025-08-30 06:01:53,069 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:04:55,888 - INFO - show_item cards parsed: 96
+2025-08-30 06:04:55,901 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:07:58,711 - INFO - show_item cards parsed: 96
+2025-08-30 06:07:58,726 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:11:01,483 - INFO - show_item cards parsed: 96
+2025-08-30 06:11:01,495 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:14:04,307 - INFO - show_item cards parsed: 96
+2025-08-30 06:14:04,321 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:17:07,105 - INFO - show_item cards parsed: 96
+2025-08-30 06:17:07,118 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:20:09,888 - INFO - show_item cards parsed: 96
+2025-08-30 06:20:09,901 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:24:55,668 - INFO - show_item cards parsed: 96
+2025-08-30 06:24:55,682 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:27:58,567 - INFO - show_item cards parsed: 96
+2025-08-30 06:27:58,579 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:32:33,290 - INFO - show_item cards parsed: 96
+2025-08-30 06:32:33,304 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:35:58,020 - WARNING - scrape_fail: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+2025-08-30 06:39:00,881 - INFO - show_item cards parsed: 96
+2025-08-30 06:39:00,895 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:43:13,805 - INFO - show_item cards parsed: 96
+2025-08-30 06:43:13,816 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:46:16,723 - INFO - show_item cards parsed: 96
+2025-08-30 06:46:16,738 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:49:19,502 - INFO - show_item cards parsed: 96
+2025-08-30 06:49:19,515 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:52:22,548 - INFO - show_item cards parsed: 96
+2025-08-30 06:52:22,562 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:55:25,355 - INFO - show_item cards parsed: 96
+2025-08-30 06:55:25,370 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 06:58:28,249 - INFO - show_item cards parsed: 96
+2025-08-30 06:58:28,259 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:01:30,970 - INFO - show_item cards parsed: 96
+2025-08-30 07:01:30,983 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:04:33,788 - INFO - show_item cards parsed: 96
+2025-08-30 07:04:33,801 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:07:36,616 - INFO - show_item cards parsed: 96
+2025-08-30 07:07:36,629 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:10:39,459 - INFO - show_item cards parsed: 96
+2025-08-30 07:10:39,472 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:13:42,226 - INFO - show_item cards parsed: 96
+2025-08-30 07:13:42,237 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:16:45,028 - INFO - show_item cards parsed: 96
+2025-08-30 07:16:45,040 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:19:47,803 - INFO - show_item cards parsed: 96
+2025-08-30 07:19:47,816 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:22:50,605 - INFO - show_item cards parsed: 96
+2025-08-30 07:22:50,616 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:25:53,545 - INFO - show_item cards parsed: 96
+2025-08-30 07:25:53,557 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:28:56,367 - INFO - show_item cards parsed: 96
+2025-08-30 07:28:56,379 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:31:59,232 - INFO - show_item cards parsed: 96
+2025-08-30 07:31:59,243 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:35:02,025 - INFO - show_item cards parsed: 96
+2025-08-30 07:35:02,039 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:38:04,814 - INFO - show_item cards parsed: 96
+2025-08-30 07:38:04,828 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:41:07,600 - INFO - show_item cards parsed: 96
+2025-08-30 07:41:07,613 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:44:10,413 - INFO - show_item cards parsed: 96
+2025-08-30 07:44:10,425 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:47:13,137 - INFO - show_item cards parsed: 96
+2025-08-30 07:47:13,147 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:50:15,883 - INFO - show_item cards parsed: 96
+2025-08-30 07:50:15,896 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:53:18,696 - INFO - show_item cards parsed: 96
+2025-08-30 07:53:18,708 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:56:21,533 - INFO - show_item cards parsed: 96
+2025-08-30 07:56:21,547 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 07:59:24,358 - INFO - show_item cards parsed: 96
+2025-08-30 07:59:24,370 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:02:27,155 - INFO - show_item cards parsed: 96
+2025-08-30 08:02:27,166 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:05:29,940 - INFO - show_item cards parsed: 96
+2025-08-30 08:05:29,953 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:08:32,756 - INFO - show_item cards parsed: 96
+2025-08-30 08:08:32,767 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:11:35,514 - INFO - show_item cards parsed: 96
+2025-08-30 08:11:35,526 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:14:38,278 - INFO - show_item cards parsed: 96
+2025-08-30 08:14:38,291 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:17:40,995 - INFO - show_item cards parsed: 96
+2025-08-30 08:17:41,005 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:20:43,715 - INFO - show_item cards parsed: 96
+2025-08-30 08:20:43,727 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:23:46,380 - INFO - show_item cards parsed: 96
+2025-08-30 08:23:46,392 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:26:49,065 - INFO - show_item cards parsed: 96
+2025-08-30 08:26:49,077 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:29:51,743 - INFO - show_item cards parsed: 96
+2025-08-30 08:29:51,756 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:32:54,414 - INFO - show_item cards parsed: 96
+2025-08-30 08:32:54,424 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:35:57,111 - INFO - show_item cards parsed: 96
+2025-08-30 08:35:57,123 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:38:59,946 - INFO - show_item cards parsed: 96
+2025-08-30 08:38:59,959 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:42:02,637 - INFO - show_item cards parsed: 96
+2025-08-30 08:42:02,648 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:45:05,386 - INFO - show_item cards parsed: 96
+2025-08-30 08:45:05,399 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:48:08,050 - INFO - show_item cards parsed: 96
+2025-08-30 08:48:08,061 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:51:10,696 - INFO - show_item cards parsed: 96
+2025-08-30 08:51:10,707 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:54:13,297 - INFO - show_item cards parsed: 96
+2025-08-30 08:54:13,314 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 08:57:16,091 - INFO - show_item cards parsed: 96
+2025-08-30 08:57:16,102 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 09:00:42,866 - INFO - show_item cards parsed: 96
+2025-08-30 09:00:42,880 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 09:03:45,532 - INFO - show_item cards parsed: 96
+2025-08-30 09:03:45,543 - INFO - DB upsert (show_item): inserted=0, updated=96
+2025-08-30 09:06:48,089 - INFO - show_item cards parsed: 91
+2025-08-30 09:06:48,099 - INFO - DB upsert (show_item): inserted=0, updated=91
+2025-08-30 09:09:50,666 - INFO - show_item cards parsed: 91
+2025-08-30 09:09:50,680 - INFO - DB upsert (show_item): inserted=0, updated=91
+2025-08-30 09:12:53,233 - INFO - show_item cards parsed: 91
+2025-08-30 09:12:53,244 - INFO - DB upsert (show_item): inserted=0, updated=91
+2025-08-30 09:15:55,753 - INFO - show_item cards parsed: 84
+2025-08-30 09:15:55,765 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:18:58,249 - INFO - show_item cards parsed: 84
+2025-08-30 09:18:58,261 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:22:00,707 - INFO - show_item cards parsed: 84
+2025-08-30 09:22:00,717 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:25:03,186 - INFO - show_item cards parsed: 84
+2025-08-30 09:25:03,196 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:28:05,629 - INFO - show_item cards parsed: 84
+2025-08-30 09:28:05,640 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:31:08,095 - INFO - show_item cards parsed: 84
+2025-08-30 09:31:08,104 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:34:10,539 - INFO - show_item cards parsed: 84
+2025-08-30 09:34:10,552 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:37:13,025 - INFO - show_item cards parsed: 84
+2025-08-30 09:37:13,037 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:40:15,549 - INFO - show_item cards parsed: 84
+2025-08-30 09:40:15,558 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:43:18,039 - INFO - show_item cards parsed: 84
+2025-08-30 09:43:18,050 - INFO - DB upsert (show_item): inserted=0, updated=84
+2025-08-30 09:46:20,379 - INFO - show_item cards parsed: 82
+2025-08-30 09:46:20,390 - INFO - DB upsert (show_item): inserted=0, updated=82
+2025-08-30 09:49:22,794 - INFO - show_item cards parsed: 82
+2025-08-30 09:49:22,803 - INFO - DB upsert (show_item): inserted=0, updated=82
+2025-08-30 09:52:25,118 - INFO - show_item cards parsed: 82
+2025-08-30 09:52:25,131 - INFO - DB upsert (show_item): inserted=0, updated=82
+2025-08-30 09:55:27,430 - INFO - show_item cards parsed: 81
+2025-08-30 09:55:27,443 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 09:58:29,746 - INFO - show_item cards parsed: 81
+2025-08-30 09:58:29,754 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:01:32,076 - INFO - show_item cards parsed: 81
+2025-08-30 10:01:32,086 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:04:34,426 - INFO - show_item cards parsed: 81
+2025-08-30 10:04:34,436 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:07:36,729 - INFO - show_item cards parsed: 81
+2025-08-30 10:07:36,739 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:10:39,046 - INFO - show_item cards parsed: 81
+2025-08-30 10:10:39,057 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:13:41,396 - INFO - show_item cards parsed: 81
+2025-08-30 10:13:41,406 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:16:43,736 - INFO - show_item cards parsed: 81
+2025-08-30 10:16:43,744 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:19:46,093 - INFO - show_item cards parsed: 81
+2025-08-30 10:19:46,102 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:22:48,389 - INFO - show_item cards parsed: 81
+2025-08-30 10:22:48,399 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:25:50,748 - INFO - show_item cards parsed: 81
+2025-08-30 10:25:50,758 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:28:53,122 - INFO - show_item cards parsed: 81
+2025-08-30 10:28:53,132 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:31:55,476 - INFO - show_item cards parsed: 81
+2025-08-30 10:31:55,489 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:34:57,910 - INFO - show_item cards parsed: 81
+2025-08-30 10:34:57,918 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:38:00,246 - INFO - show_item cards parsed: 81
+2025-08-30 10:38:00,254 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:41:02,584 - INFO - show_item cards parsed: 81
+2025-08-30 10:41:02,595 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:44:04,926 - INFO - show_item cards parsed: 81
+2025-08-30 10:44:04,939 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:47:07,304 - INFO - show_item cards parsed: 81
+2025-08-30 10:47:07,312 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:50:09,679 - INFO - show_item cards parsed: 81
+2025-08-30 10:50:09,690 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:53:12,042 - INFO - show_item cards parsed: 81
+2025-08-30 10:53:12,049 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:56:14,367 - INFO - show_item cards parsed: 81
+2025-08-30 10:56:14,376 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 10:59:16,705 - INFO - show_item cards parsed: 81
+2025-08-30 10:59:16,716 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:05:04,610 - INFO - show_item cards parsed: 81
+2025-08-30 11:05:04,622 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:09:45,186 - INFO - show_item cards parsed: 81
+2025-08-30 11:09:45,194 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:12:47,536 - INFO - show_item cards parsed: 81
+2025-08-30 11:12:47,549 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:15:50,334 - INFO - show_item cards parsed: 81
+2025-08-30 11:15:50,344 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:18:52,655 - INFO - show_item cards parsed: 81
+2025-08-30 11:18:52,664 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:21:55,189 - INFO - show_item cards parsed: 81
+2025-08-30 11:21:55,200 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:24:57,517 - INFO - show_item cards parsed: 81
+2025-08-30 11:24:57,529 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:27:59,875 - INFO - show_item cards parsed: 81
+2025-08-30 11:27:59,883 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:31:02,201 - INFO - show_item cards parsed: 81
+2025-08-30 11:31:02,214 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:34:04,553 - INFO - show_item cards parsed: 81
+2025-08-30 11:34:04,564 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:37:06,873 - INFO - show_item cards parsed: 81
+2025-08-30 11:37:06,880 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:40:09,218 - INFO - show_item cards parsed: 81
+2025-08-30 11:40:09,228 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:43:11,581 - INFO - show_item cards parsed: 81
+2025-08-30 11:43:11,592 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:46:13,977 - INFO - show_item cards parsed: 81
+2025-08-30 11:46:13,986 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:49:16,342 - INFO - show_item cards parsed: 81
+2025-08-30 11:49:16,352 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:52:18,720 - INFO - show_item cards parsed: 81
+2025-08-30 11:52:18,729 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:55:21,066 - INFO - show_item cards parsed: 81
+2025-08-30 11:55:21,073 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 11:58:23,360 - INFO - show_item cards parsed: 81
+2025-08-30 11:58:23,369 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:01:25,764 - INFO - show_item cards parsed: 81
+2025-08-30 12:01:25,775 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:04:28,087 - INFO - show_item cards parsed: 81
+2025-08-30 12:04:28,097 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:07:39,109 - INFO - 📝 logging to ./bot.log
+2025-08-30 12:07:39,109 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 12:07:39,109 - INFO - ✅ DB schema ensured
+2025-08-30 12:07:39,109 - INFO - ✅ DB schema ensured
+2025-08-30 12:07:39,109 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 12:07:39,109 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 12:07:39,377 - INFO - Scheduler started
+2025-08-30 12:07:39,379 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 12:07:41,606 - INFO - show_item cards parsed: 81
+2025-08-30 12:07:41,617 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:08:41,258 - INFO - 📝 logging to ./bot.log
+2025-08-30 12:08:41,258 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 12:08:41,258 - INFO - ✅ DB schema ensured
+2025-08-30 12:08:41,258 - INFO - ✅ DB schema ensured
+2025-08-30 12:08:41,258 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 12:08:41,258 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 12:08:41,556 - INFO - Scheduler started
+2025-08-30 12:08:41,558 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 12:08:43,803 - INFO - show_item cards parsed: 81
+2025-08-30 12:08:43,811 - INFO - DB upsert (show_item): inserted=81, updated=0
+2025-08-30 12:11:46,177 - INFO - show_item cards parsed: 81
+2025-08-30 12:11:46,188 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:14:48,487 - INFO - show_item cards parsed: 81
+2025-08-30 12:14:48,499 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:17:50,847 - INFO - show_item cards parsed: 81
+2025-08-30 12:17:50,856 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:20:53,229 - INFO - show_item cards parsed: 81
+2025-08-30 12:20:53,240 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:23:55,580 - INFO - show_item cards parsed: 81
+2025-08-30 12:23:55,594 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:26:57,985 - INFO - show_item cards parsed: 81
+2025-08-30 12:26:57,997 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:30:00,321 - INFO - show_item cards parsed: 81
+2025-08-30 12:30:00,331 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:33:02,710 - INFO - show_item cards parsed: 81
+2025-08-30 12:33:02,721 - INFO - DB upsert (show_item): inserted=0, updated=81
+2025-08-30 12:36:05,089 - INFO - show_item cards parsed: 77
+2025-08-30 12:36:05,100 - INFO - DB upsert (show_item): inserted=0, updated=77
+2025-08-30 12:39:07,355 - INFO - show_item cards parsed: 77
+2025-08-30 12:39:07,366 - INFO - DB upsert (show_item): inserted=0, updated=77
+2025-08-30 12:42:09,634 - INFO - show_item cards parsed: 77
+2025-08-30 12:42:09,645 - INFO - DB upsert (show_item): inserted=0, updated=77
+2025-08-30 12:45:11,888 - INFO - show_item cards parsed: 77
+2025-08-30 12:45:11,900 - INFO - DB upsert (show_item): inserted=0, updated=77
+2025-08-30 12:48:14,140 - INFO - show_item cards parsed: 77
+2025-08-30 12:48:14,151 - INFO - DB upsert (show_item): inserted=0, updated=77
+2025-08-30 12:51:16,550 - INFO - show_item cards parsed: 77
+2025-08-30 12:51:16,561 - INFO - DB upsert (show_item): inserted=0, updated=77
+2025-08-30 12:54:18,792 - INFO - show_item cards parsed: 77
+2025-08-30 12:54:18,802 - INFO - DB upsert (show_item): inserted=0, updated=77
+2025-08-30 12:57:21,047 - INFO - show_item cards parsed: 75
+2025-08-30 12:57:21,057 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:00:23,338 - INFO - show_item cards parsed: 75
+2025-08-30 13:00:23,349 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:03:25,592 - INFO - show_item cards parsed: 75
+2025-08-30 13:03:25,604 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:06:27,816 - INFO - show_item cards parsed: 75
+2025-08-30 13:06:27,826 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:09:30,039 - INFO - show_item cards parsed: 75
+2025-08-30 13:09:30,051 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:12:32,329 - INFO - show_item cards parsed: 75
+2025-08-30 13:12:32,338 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:15:34,543 - INFO - show_item cards parsed: 75
+2025-08-30 13:15:34,555 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:18:36,785 - INFO - show_item cards parsed: 75
+2025-08-30 13:18:36,797 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:21:39,014 - INFO - show_item cards parsed: 75
+2025-08-30 13:21:39,027 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:24:41,254 - INFO - show_item cards parsed: 75
+2025-08-30 13:24:41,264 - INFO - DB upsert (show_item): inserted=0, updated=75
+2025-08-30 13:27:43,477 - INFO - show_item cards parsed: 70
+2025-08-30 13:27:43,486 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:30:45,671 - INFO - show_item cards parsed: 70
+2025-08-30 13:30:45,681 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:33:47,928 - INFO - show_item cards parsed: 70
+2025-08-30 13:33:47,937 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:36:50,149 - INFO - show_item cards parsed: 70
+2025-08-30 13:36:50,159 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:39:52,370 - INFO - show_item cards parsed: 70
+2025-08-30 13:39:52,381 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:42:54,546 - INFO - show_item cards parsed: 70
+2025-08-30 13:42:54,556 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:45:56,813 - INFO - show_item cards parsed: 70
+2025-08-30 13:45:56,823 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:48:59,024 - INFO - show_item cards parsed: 70
+2025-08-30 13:48:59,034 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:52:01,207 - INFO - show_item cards parsed: 70
+2025-08-30 13:52:01,218 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:55:03,496 - INFO - show_item cards parsed: 70
+2025-08-30 13:55:03,506 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 13:58:05,686 - INFO - show_item cards parsed: 70
+2025-08-30 13:58:05,697 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:01:07,911 - INFO - show_item cards parsed: 70
+2025-08-30 14:01:07,921 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:04:10,145 - INFO - show_item cards parsed: 70
+2025-08-30 14:04:10,156 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:07:12,350 - INFO - show_item cards parsed: 70
+2025-08-30 14:07:12,360 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:10:14,683 - INFO - show_item cards parsed: 70
+2025-08-30 14:10:14,693 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:14:12,720 - INFO - show_item cards parsed: 70
+2025-08-30 14:14:12,731 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:18:51,622 - INFO - show_item cards parsed: 70
+2025-08-30 14:18:51,635 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:23:30,029 - INFO - show_item cards parsed: 70
+2025-08-30 14:23:30,039 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:28:07,516 - INFO - show_item cards parsed: 70
+2025-08-30 14:28:07,526 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:31:09,714 - INFO - show_item cards parsed: 70
+2025-08-30 14:31:09,724 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:34:11,874 - INFO - show_item cards parsed: 70
+2025-08-30 14:34:11,884 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:37:14,092 - INFO - show_item cards parsed: 70
+2025-08-30 14:37:14,102 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:40:16,363 - INFO - show_item cards parsed: 70
+2025-08-30 14:40:16,372 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:43:18,581 - INFO - show_item cards parsed: 70
+2025-08-30 14:43:18,591 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:46:20,782 - INFO - show_item cards parsed: 70
+2025-08-30 14:46:20,791 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:49:23,044 - INFO - show_item cards parsed: 70
+2025-08-30 14:49:23,056 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:52:25,208 - INFO - show_item cards parsed: 70
+2025-08-30 14:52:25,219 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:55:27,476 - INFO - show_item cards parsed: 70
+2025-08-30 14:55:27,486 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 14:58:29,697 - INFO - show_item cards parsed: 70
+2025-08-30 14:58:29,707 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 15:01:31,881 - INFO - show_item cards parsed: 70
+2025-08-30 15:01:31,889 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 15:04:34,133 - INFO - show_item cards parsed: 70
+2025-08-30 15:04:34,144 - INFO - DB upsert (show_item): inserted=0, updated=70
+2025-08-30 15:07:36,201 - INFO - show_item cards parsed: 64
+2025-08-30 15:07:36,210 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:10:38,263 - INFO - show_item cards parsed: 64
+2025-08-30 15:10:38,274 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:13:40,332 - INFO - show_item cards parsed: 64
+2025-08-30 15:13:40,342 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:16:42,473 - INFO - show_item cards parsed: 64
+2025-08-30 15:16:42,482 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:19:44,550 - INFO - show_item cards parsed: 64
+2025-08-30 15:19:44,559 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:22:46,608 - INFO - show_item cards parsed: 64
+2025-08-30 15:22:46,615 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:25:48,672 - INFO - show_item cards parsed: 64
+2025-08-30 15:25:48,680 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:28:50,671 - INFO - show_item cards parsed: 64
+2025-08-30 15:28:50,681 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:32:22,869 - INFO - show_item cards parsed: 64
+2025-08-30 15:32:22,878 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:37:49,806 - INFO - show_item cards parsed: 64
+2025-08-30 15:37:49,816 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:42:50,480 - INFO - show_item cards parsed: 64
+2025-08-30 15:42:50,490 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:45:52,672 - INFO - show_item cards parsed: 64
+2025-08-30 15:45:52,682 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:48:54,755 - INFO - show_item cards parsed: 64
+2025-08-30 15:48:54,765 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:51:56,982 - INFO - show_item cards parsed: 64
+2025-08-30 15:51:56,990 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:54:59,086 - INFO - show_item cards parsed: 64
+2025-08-30 15:54:59,096 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 15:58:01,175 - INFO - show_item cards parsed: 64
+2025-08-30 15:58:01,184 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:01:03,423 - INFO - show_item cards parsed: 64
+2025-08-30 16:01:03,432 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:04:05,439 - INFO - show_item cards parsed: 64
+2025-08-30 16:04:05,448 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:07:07,528 - INFO - show_item cards parsed: 64
+2025-08-30 16:07:07,537 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:10:09,610 - INFO - show_item cards parsed: 64
+2025-08-30 16:10:09,621 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:13:11,667 - INFO - show_item cards parsed: 64
+2025-08-30 16:13:11,676 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:16:13,776 - INFO - show_item cards parsed: 64
+2025-08-30 16:16:13,783 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:19:15,861 - INFO - show_item cards parsed: 64
+2025-08-30 16:19:15,870 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:22:17,978 - INFO - show_item cards parsed: 64
+2025-08-30 16:22:17,987 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:25:20,112 - INFO - show_item cards parsed: 64
+2025-08-30 16:25:20,121 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:28:22,177 - INFO - show_item cards parsed: 64
+2025-08-30 16:28:22,185 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:31:24,254 - INFO - show_item cards parsed: 64
+2025-08-30 16:31:24,264 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:34:26,398 - INFO - show_item cards parsed: 64
+2025-08-30 16:34:26,408 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:37:28,500 - INFO - show_item cards parsed: 64
+2025-08-30 16:37:28,510 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:40:30,544 - INFO - show_item cards parsed: 64
+2025-08-30 16:40:30,550 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:44:24,377 - INFO - show_item cards parsed: 64
+2025-08-30 16:44:24,386 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:47:26,662 - INFO - show_item cards parsed: 64
+2025-08-30 16:47:26,673 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:50:28,756 - INFO - show_item cards parsed: 64
+2025-08-30 16:50:28,766 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:53:30,896 - INFO - show_item cards parsed: 64
+2025-08-30 16:53:30,905 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:56:33,015 - INFO - show_item cards parsed: 64
+2025-08-30 16:56:33,025 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 16:59:35,105 - INFO - show_item cards parsed: 64
+2025-08-30 16:59:35,115 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:02:37,204 - INFO - show_item cards parsed: 64
+2025-08-30 17:02:37,212 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:05:39,260 - INFO - show_item cards parsed: 64
+2025-08-30 17:05:39,267 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:08:41,391 - INFO - show_item cards parsed: 64
+2025-08-30 17:08:41,400 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:11:43,480 - INFO - show_item cards parsed: 64
+2025-08-30 17:11:43,491 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:14:45,585 - INFO - show_item cards parsed: 64
+2025-08-30 17:14:45,596 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:17:47,692 - INFO - show_item cards parsed: 64
+2025-08-30 17:17:47,702 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:20:49,757 - INFO - show_item cards parsed: 64
+2025-08-30 17:20:49,768 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:23:51,842 - INFO - show_item cards parsed: 64
+2025-08-30 17:23:51,853 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:26:53,967 - INFO - show_item cards parsed: 64
+2025-08-30 17:26:53,975 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:29:56,030 - INFO - show_item cards parsed: 64
+2025-08-30 17:29:56,037 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:32:58,204 - INFO - show_item cards parsed: 64
+2025-08-30 17:32:58,212 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:36:00,279 - INFO - show_item cards parsed: 64
+2025-08-30 17:36:00,289 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:39:02,371 - INFO - show_item cards parsed: 64
+2025-08-30 17:39:02,380 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 17:42:04,455 - INFO - show_item cards parsed: 64
+2025-08-30 17:42:04,465 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:01:39,259 - INFO - show_item cards parsed: 64
+2025-08-30 18:01:39,269 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:18:14,411 - INFO - show_item cards parsed: 64
+2025-08-30 18:18:14,421 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:21:16,536 - INFO - show_item cards parsed: 64
+2025-08-30 18:21:16,544 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:24:18,591 - INFO - show_item cards parsed: 64
+2025-08-30 18:24:18,598 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:27:20,702 - INFO - show_item cards parsed: 64
+2025-08-30 18:27:20,712 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:30:22,773 - INFO - show_item cards parsed: 64
+2025-08-30 18:30:22,782 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:33:24,908 - INFO - show_item cards parsed: 64
+2025-08-30 18:33:24,918 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:36:26,976 - INFO - show_item cards parsed: 64
+2025-08-30 18:36:26,985 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:39:29,076 - INFO - show_item cards parsed: 64
+2025-08-30 18:39:29,087 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:42:31,311 - INFO - show_item cards parsed: 64
+2025-08-30 18:42:31,321 - INFO - DB upsert (show_item): inserted=0, updated=64
+2025-08-30 18:45:33,394 - INFO - show_item cards parsed: 66
+2025-08-30 18:45:33,400 - INFO - DB upsert (show_item): inserted=2, updated=64
+2025-08-30 18:48:35,477 - INFO - show_item cards parsed: 66
+2025-08-30 18:48:35,485 - INFO - DB upsert (show_item): inserted=0, updated=66
+2025-08-30 18:51:37,577 - INFO - show_item cards parsed: 66
+2025-08-30 18:51:37,587 - INFO - DB upsert (show_item): inserted=0, updated=66
+2025-08-30 18:54:39,707 - INFO - show_item cards parsed: 66
+2025-08-30 18:54:39,717 - INFO - DB upsert (show_item): inserted=0, updated=66
+2025-08-30 18:57:41,882 - INFO - show_item cards parsed: 68
+2025-08-30 18:57:41,892 - INFO - DB upsert (show_item): inserted=2, updated=66
+2025-08-30 19:00:44,076 - INFO - show_item cards parsed: 68
+2025-08-30 19:00:44,086 - INFO - DB upsert (show_item): inserted=0, updated=68
+2025-08-30 19:03:46,217 - INFO - show_item cards parsed: 68
+2025-08-30 19:03:46,227 - INFO - DB upsert (show_item): inserted=0, updated=68
+2025-08-30 19:06:48,406 - INFO - show_item cards parsed: 69
+2025-08-30 19:06:48,413 - INFO - DB upsert (show_item): inserted=1, updated=68
+2025-08-30 19:09:50,758 - INFO - show_item cards parsed: 69
+2025-08-30 19:09:50,765 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 19:17:29,259 - INFO - show_item cards parsed: 69
+2025-08-30 19:17:29,270 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 19:20:53,018 - INFO - show_item cards parsed: 69
+2025-08-30 19:20:53,027 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 19:29:06,693 - INFO - show_item cards parsed: 69
+2025-08-30 19:29:06,703 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 19:50:57,972 - INFO - show_item cards parsed: 69
+2025-08-30 19:50:57,982 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 19:56:57,936 - INFO - show_item cards parsed: 69
+2025-08-30 19:56:57,945 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 20:00:00,168 - INFO - show_item cards parsed: 69
+2025-08-30 20:00:00,177 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 20:35:27,924 - INFO - show_item cards parsed: 69
+2025-08-30 20:35:27,931 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 20:47:05,912 - INFO - show_item cards parsed: 69
+2025-08-30 20:47:05,922 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 20:50:08,168 - INFO - show_item cards parsed: 69
+2025-08-30 20:50:08,178 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 21:02:24,683 - INFO - 📝 logging to ./bot.log
+2025-08-30 21:02:24,684 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:02:24,684 - INFO - ✅ DB schema ensured
+2025-08-30 21:02:24,684 - INFO - ✅ DB schema ensured
+2025-08-30 21:02:24,684 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:02:24,684 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 21:02:24,937 - INFO - Scheduler started
+2025-08-30 21:02:24,937 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 21:02:27,006 - INFO - show_item cards parsed: 69
+2025-08-30 21:02:27,020 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 21:09:45,333 - INFO - 📝 logging to ./bot.log
+2025-08-30 21:09:45,334 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:09:45,334 - INFO - ✅ DB schema ensured
+2025-08-30 21:09:45,334 - INFO - ✅ DB schema ensured
+2025-08-30 21:09:45,334 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:09:45,334 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 21:09:45,597 - INFO - Scheduler started
+2025-08-30 21:09:45,598 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 21:09:47,809 - INFO - show_item cards parsed: 69
+2025-08-30 21:09:47,820 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 21:13:25,988 - INFO - 📝 logging to ./bot.log
+2025-08-30 21:13:25,988 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:13:25,988 - INFO - ✅ DB schema ensured
+2025-08-30 21:13:25,988 - INFO - ✅ DB schema ensured
+2025-08-30 21:13:25,988 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:13:25,988 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 21:13:26,265 - INFO - Scheduler started
+2025-08-30 21:13:26,266 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 21:13:28,338 - INFO - show_item cards parsed: 69
+2025-08-30 21:13:28,339 - INFO - DB upsert (show_item): inserted=0, updated=69
+2025-08-30 21:15:35,452 - INFO - 📝 logging to ./bot.log
+2025-08-30 21:15:35,452 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:15:35,452 - INFO - ✅ DB schema ensured
+2025-08-30 21:15:35,452 - INFO - ✅ DB schema ensured
+2025-08-30 21:15:35,452 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:15:35,452 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 21:15:35,808 - INFO - Scheduler started
+2025-08-30 21:15:35,809 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 21:17:35,444 - INFO - 📝 logging to ./bot.log
+2025-08-30 21:17:35,445 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:17:35,445 - INFO - ✅ DB schema ensured
+2025-08-30 21:17:35,445 - INFO - ✅ DB schema ensured
+2025-08-30 21:17:35,445 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:17:35,445 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 21:17:35,701 - INFO - Scheduler started
+2025-08-30 21:17:35,702 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 21:17:37,816 - INFO - show_item cards parsed: 67
+2025-08-30 21:17:37,818 - INFO - DB upsert (show_item): inserted=0, updated=67
+2025-08-30 21:20:40,035 - INFO - show_item cards parsed: 67
+2025-08-30 21:20:40,037 - INFO - DB upsert (show_item): inserted=0, updated=67
+2025-08-30 21:23:42,218 - INFO - show_item cards parsed: 67
+2025-08-30 21:23:42,220 - INFO - DB upsert (show_item): inserted=0, updated=67
+2025-08-30 21:24:37,808 - INFO - 📝 logging to ./bot.log
+2025-08-30 21:24:37,808 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=180s | DB=/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:24:37,808 - INFO - ✅ DB schema ensured
+2025-08-30 21:24:37,808 - INFO - ✅ DB schema ensured
+2025-08-30 21:24:37,808 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db
+2025-08-30 21:24:37,808 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tusbot_v2.5.2/flights.db'}
+2025-08-30 21:24:38,095 - INFO - Scheduler started
+2025-08-30 21:24:38,096 - WARNING - ⚠️ JobQueue לא זמין — ניטור ירוץ בלולאת fallback
+2025-08-30 21:24:40,151 - INFO - show_item cards parsed: 67
+2025-08-30 21:24:40,153 - INFO - DB upsert (show_item): inserted=0, updated=67

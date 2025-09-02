@@ -1,0 +1,386 @@
+from __future__ import annotations
+from typing import Dict, Any, Tuple, List, Optional
+import datetime as dt
+import sqlite3
+
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ContextTypes
+
+import db  # לא נוגעים במודול, רק משתמשים בו כמו שהוא
+
+
+# =========================
+# מצב בחירה בזיכרון לכל משתמש/צ'אט (ללא התמדה בדיסק)
+# =========================
+# session state structure:
+# {
+#   "destinations": set[str] | {"__ALL__"},
+#   "date": Optional[str: YYYY-MM-DD],
+#   "flex3": bool,   # +/- 3 ימים
+#   "seats_min": int,  # 1..5 (אם לא ידוע בטיסה — נחשב 5)
+#   "visibility": "new" | "live" | "old" | "any"
+# }
+SESS: Dict[int, Dict[str, Any]] = {}
+
+
+# =========================
+# כלי DB
+# =========================
+def _conn() -> sqlite3.Connection:
+    """
+    נסיון ראשון: db.get_conn() כמו אצלך; אם דורש path, נשתמש במה ש־db מגדיר כברירת מחדל.
+    לא משנים את db.py.
+    """
+    try:
+        return db.get_conn()  # סוגריים כבקשתך בגרסאות האחרונות
+    except TypeError:
+        # התאמת אחורה — אם פונקציה דורשת path:
+        try:
+            from config import DB_PATH  # לא משנה את config, רק קורא
+            return db.get_conn(DB_PATH)
+        except Exception:
+            # ברירת מחדל ל־./flights.db אם אין כלום
+            return db.get_conn("./flights.db")
+
+
+def _row_dicts(rows) -> List[Dict[str, Any]]:
+    return [dict(r) if not isinstance(r, dict) else r for r in rows]
+
+
+# =========================
+# הגדרות ברירת מחדל למצב
+# =========================
+def _ensure_session(chat_id: int) -> Dict[str, Any]:
+    s = SESS.get(chat_id)
+    if not s:
+        s = {
+            "destinations": set(),   # אפשר גם "__ALL__"
+            "date": None,            # "YYYY-MM-DD"
+            "flex3": False,          # +/- 3 ימים
+            "seats_min": 1,          # 1..5
+            "visibility": "any",     # "new"/"live"/"old"/"any"
+        }
+        SESS[chat_id] = s
+    return s
+
+
+# =========================
+# שאילתות עזר
+# =========================
+def _distinct_destinations(conn: sqlite3.Connection) -> List[str]:
+    # ננסה קודם עיר, אם לא—destination
+    # קיימות גרסאות שונות של הסכימה, לכן משתמשים ב-COALESCE.
+    q = """
+        SELECT DISTINCT TRIM(COALESCE(dest_city, destination, '')) AS d
+        FROM flights
+        WHERE TRIM(COALESCE(dest_city, destination, '')) <> ''
+        ORDER BY d COLLATE NOCASE
+    """
+    try:
+        conn.row_factory = sqlite3.Row
+        return [r["d"] for r in conn.execute(q).fetchall()]
+    except Exception:
+        # התאמה לסכימות ישנות מאוד
+        q2 = """
+            SELECT DISTINCT TRIM(COALESCE(destination, '')) AS d
+            FROM flights
+            WHERE TRIM(COALESCE(destination, '')) <> ''
+            ORDER BY d COLLATE NOCASE
+        """
+        return [r[0] for r in conn.execute(q2).fetchall()]
+
+
+def _summary_by_destination(conn: sqlite3.Connection, s: Dict[str, Any]) -> List[Tuple[str, int]]:
+    """
+    מחזיר [(יעד, כמות)] לפי הסינון שנבחר—בצורה גמישה לסכימות שונות.
+    """
+    conn.row_factory = sqlite3.Row
+    where = []
+    args: List[Any] = []
+
+    # יעד
+    if s["destinations"] and "__ALL__" not in s["destinations"]:
+        placeholders = ",".join("?" for _ in s["destinations"])
+        where.append(f"TRIM(COALESCE(dest_city, destination, '')) IN ({placeholders})")
+        args.extend(sorted(list(s["destinations"])))
+
+    # תאריך (לפי טקסטים אם קיימים בשדות החדשים) — אם אין שדות, מתעלמים בשקט
+    date_sql = None
+    flex = s.get("flex3", False)
+    if s.get("date"):
+        try:
+            d0 = dt.date.fromisoformat(s["date"])
+            if flex:
+                d1 = d0 - dt.timedelta(days=3)
+                d2 = d0 + dt.timedelta(days=3)
+            else:
+                d1 = d0
+                d2 = d0
+            # ננסה להתאים לשדות טקסטואליים מה־HTML contract, אם קיימים:
+            # out_date/back_date בפורמט YYYY-MM-DD (אם נשמרו ע"י הסקרייפר החדש)
+            date_sql = "( (out_date BETWEEN ? AND ?) OR (back_date BETWEEN ? AND ?) )"
+            args.extend([d1.isoformat(), d2.isoformat(), d1.isoformat(), d2.isoformat()])
+            where.append(date_sql)
+        except Exception:
+            pass
+
+    # מושבים מינימלי — אם אין עמודה seats, מניחים 5 בטיסות חסרות, והסנן לא יפיל אותן
+    seats_sql = "(COALESCE(seats, 5) >= ?)"
+    args.append(int(s.get("seats_min", 1)))
+    where.append(seats_sql)
+
+    # נראות: new/live/old/any — לפי last_seen זמין בכל הגרסאות האחרונות
+    vis = s.get("visibility", "any")
+    now = dt.datetime.utcnow()
+    one_hour = now - dt.timedelta(hours=1)
+    two_hours = now - dt.timedelta(hours=2)
+
+    if vis == "new":
+        where.append("(COALESCE(last_seen, CURRENT_TIMESTAMP) >= ?)")
+        args.append(one_hour.isoformat(sep=" "))
+    elif vis == "live":
+        # “קיימות” — ראינו במהלך השעתיים האחרונות (גמיש)
+        where.append("(COALESCE(last_seen, '') >= ?)")
+        args.append(two_hours.isoformat(sep=" "))
+    elif vis == "old":
+        # “ישנות/ירדו” — לא נראו לפחות שעתיים
+        where.append("(COALESCE(last_seen, '1970-01-01 00:00:00') < ?)")
+        args.append(two_hours.isoformat(sep=" "))
+
+    where_sql = ("WHERE " + " AND ".join(where)) if where else ""
+    sql = f"""
+        SELECT TRIM(COALESCE(dest_city, destination, '')) AS dest,
+               COUNT(*) AS c
+        FROM flights
+        {where_sql}
+        GROUP BY TRIM(COALESCE(dest_city, destination, ''))
+        ORDER BY c DESC, dest COLLATE NOCASE
+        LIMIT 50
+    """
+    rows = conn.execute(sql, args).fetchall()
+    return [(r["dest"], r["c"]) for r in rows if r["dest"]]
+
+
+# =========================
+# UI: ברכה מתחלפת
+# =========================
+def _rotating_greeting(now: Optional[dt.datetime] = None) -> str:
+    now = now or dt.datetime.utcnow()
+    bank = [
+        "✈️ ברוכים הבאים לטוסטוס—ממריאים רק על דילים לוהטים, לא על מחירים 🧯",
+        "🧭 טוסטוס כאן: נאתר, נגרד ונביא לך טיסות שיחממו את הלב ולא את הארנק 💸",
+        "🛩️ חוסכים על הכרטיס—מבזבזים בחו\"ל. דיל? מצאנו. מזוודה? תוספת 😉",
+        "😎 הטייס על הטלגרם: אתה רק בוחר יעד—אנחנו ננחית לך מחיר",
+    ]
+    # מתחלף כל שעתיים
+    idx = (now.hour // 2) % len(bank)
+    return bank[idx]
+
+
+# =========================
+# בניית המסך הראשי (אופציה C — הכול על ההודעה)
+# =========================
+def _build_main_screen(conn: sqlite3.Connection, s: Dict[str, Any]) -> Tuple[str, InlineKeyboardMarkup]:
+    # כותרת + ברכה
+    greeting = _rotating_greeting()
+
+    # רשימת יעדים
+    dests = _distinct_destinations(conn)
+    # נבחרים
+    chosen = s["destinations"]
+    all_on = ("__ALL__" in chosen) or (chosen and len(chosen) == len(dests))
+
+    def _dest_btn_label(name: str) -> str:
+        mark = "✅" if (("__ALL__" in chosen) or (name in chosen)) else "▫️"
+        return f"{mark} {name}"
+
+    # נייצר מקבצים של 2 בעמודה
+    dest_buttons: List[List[InlineKeyboardButton]] = []
+    row: List[InlineKeyboardButton] = []
+    for d in dests:
+        row.append(InlineKeyboardButton(_dest_btn_label(d)[:60], callback_data=f"dest:{d}"))
+        if len(row) == 2:
+            dest_buttons.append(row)
+            row = []
+    if row:
+        dest_buttons.append(row)
+
+    # כפתור “כל היעדים”
+    all_label = "✅ כל היעדים" if all_on else "▫️ כל היעדים"
+    dest_buttons.insert(0, [InlineKeyboardButton(all_label, callback_data="dest:__ALL__")])
+
+    # תאריכים — 12 ימים קדימה, שורה אחר שורה
+    today = dt.date.today()
+    date_rows: List[List[InlineKeyboardButton]] = []
+    date_selection = s["date"]
+    for chunk_start in range(0, 12, 6):
+        row = []
+        for i in range(chunk_start, min(chunk_start + 6, 12)):
+            d = today + dt.timedelta(days=i)
+            d_str = d.isoformat()
+            checked = "✅" if date_selection == d_str else "▫️"
+            label = f"{checked} {d.strftime('%d/%m')}"
+            row.append(InlineKeyboardButton(label, callback_data=f"date:{d_str}"))
+        date_rows.append(row)
+    # ללא תאריך + גמישות ±3
+    flex_mark = "✅" if s.get("flex3") else "▫️"
+    no_date_mark = "✅" if not s.get("date") else "▫️"
+    date_rows.append([
+        InlineKeyboardButton(f"{no_date_mark} ללא תאריך", callback_data="date:none"),
+        InlineKeyboardButton(f"{flex_mark} ±3 ימים", callback_data="flex3:toggle"),
+    ])
+
+    # מושבים מינימלי
+    seats = s.get("seats_min", 1)
+    seat_row = [
+        InlineKeyboardButton(("✅ " if seats == n else "▫️ ") + str(n), callback_data=f"seats:{n}")
+        for n in [1, 2, 3, 4, 5]
+    ]
+
+    # נראות
+    vis = s.get("visibility", "any")
+    def vlabel(k, txt): return ("✅ " if vis == k else "▫️ ") + txt
+    visibility_rows = [[
+        InlineKeyboardButton(vlabel("new", "חדשות (שעה אחרונה)"), callback_data="vis:new"),
+    ], [
+        InlineKeyboardButton(vlabel("live", "קיימות באתר"), callback_data="vis:live"),
+    ], [
+        InlineKeyboardButton(vlabel("old", "ישנות/ירדו"), callback_data="vis:old"),
+    ], [
+        InlineKeyboardButton(vlabel("any", "הכול"), callback_data="vis:any"),
+    ]]
+
+    # סיכום לפי יעד
+    summary = _summary_by_destination(conn, s)
+    if summary:
+        lines = [f"📊 סיכום לפי יעד (עד 50):"]
+        for name, c in summary[:10]:
+            lines.append(f"• {name}: {c}")
+        summary_text = "\n".join(lines)
+    else:
+        summary_text = "📊 אין תוצאות לסינון הנוכחי."
+
+    # טקסט
+    text = (
+        f"{greeting}\n\n"
+        f"🔹 **יעדים**: סמן/י יעדים מתוך הרשימה (או 'כל היעדים').\n"
+        f"🔹 **תאריכים**: בחר/י תאריך מדויק או 'ללא תאריך'. אפשר לסמן גמישות ±3.\n"
+        f"🔹 **מושבים**: מינימום מושבים פנויים לטיסה.\n"
+        f"🔹 **נראות**: חדשות / קיימות / ישנות / הכול.\n\n"
+        f"{summary_text}"
+    )
+
+    # כפתורי פעולה תחתונים
+    action_row = [
+        InlineKeyboardButton("🔄 רענון", callback_data="act:refresh"),
+        InlineKeyboardButton("🏠 איפוס", callback_data="act:reset"),
+    ]
+
+    # הרכבת המקלדת
+    keyboard: List[List[InlineKeyboardButton]] = []
+    keyboard.extend(dest_buttons)
+    keyboard.append([InlineKeyboardButton("— תאריכים —", callback_data="noop")])
+    keyboard.extend(date_rows)
+    keyboard.append([InlineKeyboardButton("— מינימום מושבים —", callback_data="noop")])
+    keyboard.append(seat_row)
+    keyboard.append([InlineKeyboardButton("— נראות —", callback_data="noop")])
+    keyboard.extend(visibility_rows)
+    keyboard.append(action_row)
+
+    return text, InlineKeyboardMarkup(keyboard)
+
+
+# =========================
+# רנדרינג הודעה בודדת בטוחה (להימנע מ-"Message is not modified")
+# =========================
+async def _safe_edit_message(q, new_text: str, new_km: InlineKeyboardMarkup) -> None:
+    old_text = q.message.text or ""
+    old_km = q.message.reply_markup
+    if old_text == new_text and str(old_km) == str(new_km):
+        new_text += "\u2063"  # תו בלתי־נראה
+    await q.edit_message_text(new_text, reply_markup=new_km)
+
+
+# =========================
+# Handlers
+# =========================
+async def handle_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    chat_id = update.effective_chat.id
+    s = _ensure_session(chat_id)
+
+    conn = _conn()
+    text, km = _build_main_screen(conn, s)
+    await update.effective_message.reply_text(text, reply_markup=km)
+
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    q = update.callback_query
+    await q.answer()
+    chat_id = update.effective_chat.id
+    s = _ensure_session(chat_id)
+    data = (q.data or "").strip()
+
+    # יעדים
+    if data.startswith("dest:"):
+        val = data.split(":", 1)[1]
+        if val == "__ALL__":
+            # toggle ALL
+            dests = set(_distinct_destinations(_conn()))
+            if "__ALL__" in s["destinations"] or s["destinations"] == dests:
+                s["destinations"] = set()
+            else:
+                s["destinations"] = {"__ALL__"}  # סימון כללי
+        else:
+            if "__ALL__" in s["destinations"]:
+                # אם היה ALL—הסר אותו ועבור לבחירה ידנית
+                s["destinations"] = set()
+            if val in s["destinations"]:
+                s["destinations"].remove(val)
+            else:
+                s["destinations"].add(val)
+
+    # תאריכים
+    elif data.startswith("date:"):
+        val = data.split(":", 1)[1]
+        if val == "none":
+            s["date"] = None
+        else:
+            s["date"] = val  # YYYY-MM-DD
+    elif data.startswith("flex3:"):
+        s["flex3"] = not s.get("flex3", False)
+
+    # מושבים
+    elif data.startswith("seats:"):
+        try:
+            s["seats_min"] = int(data.split(":", 1)[1])
+        except Exception:
+            s["seats_min"] = 1
+
+    # נראות
+    elif data.startswith("vis:"):
+        val = data.split(":", 1)[1]
+        if val in ("new", "live", "old", "any"):
+            s["visibility"] = val
+
+    # פעולות
+    elif data == "act:reset":
+        SESS[chat_id] = {
+            "destinations": set(),
+            "date": None,
+            "flex3": False,
+            "seats_min": 1,
+            "visibility": "any",
+        }
+        s = SESS[chat_id]
+    elif data == "act:refresh":
+        pass  # לא משנה את ה-state, רק מרנדר מחדש
+
+    # NOOP
+    elif data == "noop":
+        # לא עושים כלום—רק רענון תצוגה
+        pass
+
+    # רענון מסך
+    conn = _conn()
+    text, km = _build_main_screen(conn, s)
+    await _safe_edit_message(q, text, km)

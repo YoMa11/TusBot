@@ -1,0 +1,32 @@
+
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<title>tustus HTML Contract v1</title>
+<h1>חוזה HTML — מיפוי בין ה־DOM ל־DB</h1>
+<p>מסמך זה מתאר אילו סלקטורים נגרדים ומה נשמר בעמודות ה-DB.</p>
+
+<table border="1" cellpadding="6">
+<tr><th>DB Column</th><th>Source (selector / attribute)</th><th>Example</th></tr>
+<tr><td>item_id</td><td>@data_ga_item_id (fallback: @ite_item)</td><td>15502</td></tr>
+<tr><td>selapp_item</td><td>@ite_selappitem</td><td>382690_79</td></tr>
+<tr><td>category</td><td>@category</td><td>6</td></tr>
+<tr><td>provider</td><td>@data_ga_item_category4</td><td>Arkia</td></tr>
+<tr><td>affiliation</td><td>@data_ga_affiliation</td><td>וונדר - בנק הפועלים</td></tr>
+<tr><td>promo_category</td><td>@data_ga_item_category</td><td>שעתיים גג ואתם בחו&quot;ל</td></tr>
+<tr><td>destination</td><td>@data_ga_item_name (fallback: @con_desc)</td><td>אתונה - יוון</td></tr>
+<tr><td>dest_city / dest_country</td><td>split(destination, "-")</td><td>אתונה / יוון</td></tr>
+<tr><td>trip_title</td><td>.show_item_name</td><td>טיסה לאתונה</td></tr>
+<tr><td>price</td><td>@data_number_ga_price OR parse(.show_item_total_price)</td><td>150</td></tr>
+<tr><td>currency</td><td>@data_ga_currency OR infer from price_text</td><td>USD</td></tr>
+<tr><td>price_text</td><td>.show_item_total_price</td><td>$150</td></tr>
+<tr><td>img_url</td><td>.show_item_img img[src]</td><td>https://res.cloudinary.com/arkia/...</td></tr>
+<tr><td>badge_text</td><td>.spcial_message_bottom</td><td>5 מקומות אחרונים</td></tr>
+<tr><td>out_* fields</td><td>.flight_go &rarr; .from/.to elements</td><td>תל אביב &rarr; אתונה | 06:45 &rarr; 08:55 | יום ב' 01/09</td></tr>
+<tr><td>back_* fields</td><td>.flight_back &rarr; .from/.to elements</td><td>אתונה &rarr; תל אביב | 00:05 &rarr; 01:50 | יום ד' 03/09</td></tr>
+<tr><td>note</td><td>.flight_note</td><td>המחיר כולל תיק יד/גב</td></tr>
+<tr><td>more_like</td><td>.more_like_this</td><td>עוד טיסות לאתונה - יוון &gt;</td></tr>
+</table>
+
+<p>מפתח ייחודי: (item_id, selapp_item). כל שינוי יעדכן last_seen ולא ייצור שורה כפולה.</p>
+</html>

@@ -1,0 +1,4 @@
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.7.3/app.py", line 38
+    _log_startup_info()
+    ^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?

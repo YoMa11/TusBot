@@ -1,0 +1,54 @@
+from __future__ import annotations
+import datetime as dt
+from typing import Optional, Dict
+
+def format_greeting(now: Optional[dt.datetime] = None) -> str:
+    """
+    ברכה הומוריסטית/סרקסטית שמשתנה כל שעתיים.
+    """
+    if now is None:
+        now = dt.datetime.now()
+    jokes = [
+        "👋 היי, זה טוס־טוס. קפה לאורך המסלול עליך.",
+        "🤖 התקנתי טורבו. אם אין מבצע – אני מוצא הנחה לכריך.",
+        "🛫 מוכן להמראה. מקווה שהארנק נשאר על מצב טיסה.",
+        "🎯 מצאתי יעדים חמים. תבחר לפני שישבו עליהם.",
+        "🌍 היום טסים רחוק… או קרוב. תלוי בתקציב 😅",
+        "🧳 ארזתי בשבילך: יעדים, מחירים, ותקווה למושב ריק.",
+    ]
+    idx = ((now.hour // 2) + now.day) % len(jokes)
+    return jokes[idx]
+
+def format_price(currency: Optional[str], price: Optional[float], fallback: Optional[str] = None) -> str:
+    """
+    מציג מחיר יפה. אם אין price/currency – משתמש ב-fallback מטקסט גולמי.
+    """
+    if price and currency:
+        try:
+            # הצגה ללא המרה – כפי שביקשת
+            val = int(price) if float(price).is_integer() else round(float(price), 2)
+        except Exception:
+            return fallback or ""
+        return f"{currency}{val}"
+    return fallback or ""
+
+def summarize_selection(s: Dict[str, object]) -> str:
+    """
+    שורת תקציר בחירות המשתמש – יעד, תאריך, מושבים, נראות.
+    """
+    dst = "כל היעדים" if s.get("dst_all", True) else f"{s.get('dst_city','')} · {s.get('dst_country','')}"
+    mode = s.get("date_mode", "none")
+    if mode == "exact" and s.get("date_exact"):
+        d = str(s["date_exact"])
+        date_str = dt.datetime.fromisoformat(d).strftime("%d/%m/%Y")
+        date_disp = f"מדויק {date_str}"
+    elif mode == "plusminus" and s.get("date_exact"):
+        d = str(s["date_exact"])
+        date_str = dt.datetime.fromisoformat(d).strftime("%d/%m/%Y")
+        date_disp = f"±3 ימים סביב {date_str}"
+    else:
+        date_disp = "ללא תאריך"
+
+    seats = int(s.get("seats_min", 1))
+    vis = {"new":"חדשות", "active":"קיימות", "gone":"ירדו"}.get(str(s.get("visibility","active")), "קיימות")
+    return f"\nבחירה: יעד – {dst} | תאריך – {date_disp} | מושבים מינ' – {seats} | נראות – {vis}"

@@ -1,0 +1,123 @@
+from __future__ import annotations
+from typing import List, Tuple, Set
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ContextTypes
+import db
+import logic
+import config
+
+# ---------- state helpers ----------
+_SELECTED_KEY = "selected_dests"  # stores set of (city,country) tuples in user_data
+
+def _get_selected(context: ContextTypes.DEFAULT_TYPE) -> Set[Tuple[str,str]]:
+    sel = context.user_data.get(_SELECTED_KEY)
+    if not isinstance(sel, set):
+        sel = set()
+        context.user_data[_SELECTED_KEY] = sel
+    return sel
+
+# ---------- UI blocks ----------
+def _greeting_line() -> str:
+    # פתיח הומוריסטי קצר + גרסה (ללא נתונים אחרים)
+    version = getattr(config, "SCRIPT_VERSION", getattr(config, "__file_version__", ""))
+    opener = "🚀☕️ תפסנו עוד דיל שממריא מהר יותר מהקפה של הבוקר."
+    return f"{opener}\nvtustus_{version}".strip()
+
+def _build_destinations_block(conn, selected: Set[Tuple[str,str]]) -> InlineKeyboardMarkup:
+    # מביא את כל היעדים (ללא פייג'ינג), כפי שביקשת
+    # כל שורה: (city, country, cur, min_price, active)
+    rows = logic.list_all_destinations_with_country(conn)
+
+    # תווית כפתור: "<עיר> <דגל>" בלבד; סימון ✅ אם נבחר
+    btns: List[InlineKeyboardButton] = []
+    for city, country, _cur, _min_price, _active in rows:
+        flag = logic.flag_for_country(country or "")
+        mark = " ✅" if (city, country) in selected else ""
+        text = f"{city} {flag}{mark}".strip()
+        cb = f"tog:{city}|{country}"
+        btns.append(InlineKeyboardButton(text[:60], callback_data=cb))
+
+    # שתי עמודות
+    keyboard: List[List[InlineKeyboardButton]] = [btns[i:i+2] for i in range(0, len(btns), 2)]
+
+    # כפתור "כל היעדים" בראש + כפתורי תחתית
+    all_mark = "✅" if len(selected) >= len(btns) and len(btns) > 0 else ""
+    keyboard.insert(0, [InlineKeyboardButton(f"כל היעדים 🌍 {all_mark}".strip(), callback_data="tog:*")])
+    keyboard.append([
+        InlineKeyboardButton("רענון 🔄", callback_data="refresh"),
+        InlineKeyboardButton("סיכום יעדים 📊", callback_data="sum"),
+    ])
+    return InlineKeyboardMarkup(keyboard)
+
+def _build_main_screen(conn, context: ContextTypes.DEFAULT_TYPE) -> tuple[str, InlineKeyboardMarkup]:
+    selected = _get_selected(context)
+    text = _greeting_line()
+    km = _build_destinations_block(conn, selected)
+    return text, km
+
+# ---------- handlers ----------
+async def handle_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    conn = db.get_conn()
+    text, km = _build_main_screen(conn, context)
+    await update.effective_message.reply_text(text, reply_markup=km)
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    q = update.callback_query
+    await q.answer()
+    data = (q.data or "").strip()
+    conn = db.get_conn()
+    selected = _get_selected(context)
+
+    if data in ("refresh", "home"):
+        text, km = _build_main_screen(conn, context)
+        # הגנה קטנה על "Message is not modified"
+        old_text = q.message.text or ""
+        old_km = q.message.reply_markup
+        if old_text == text and str(old_km) == str(km):
+            text += "\u2063"  # תו בלתי־נראה
+        await q.edit_message_text(text, reply_markup=km)
+        return
+
+    if data == "tog:*":
+        # בחירת "כל היעדים" (טוגל: אם הכל נבחר – ננקה)
+        rows = logic.list_all_destinations_with_country(conn)
+        all_set = {(c, ctr) for c, ctr, *_ in rows}
+        if selected >= all_set:
+            selected.clear()
+        else:
+            selected.clear()
+            selected.update(all_set)
+        text, km = _build_main_screen(conn, context)
+        await q.edit_message_text(text + "\u2063", reply_markup=km)
+        return
+
+    if data.startswith("tog:"):
+        # בחירת/הסרת יעד בודד
+        payload = data[4:]
+        try:
+            city, country = payload.split("|", 1)
+        except Exception:
+            city, country = payload, ""
+        key = (city, country)
+        if key in selected:
+            selected.remove(key)
+        else:
+            selected.add(key)
+        text, km = _build_main_screen(conn, context)
+        await q.edit_message_text(text + "\u2063", reply_markup=km)
+        return
+
+    if data == "sum":
+        # סיכום יעדים שנבחרו (תצוגת טקסט פשוטה; המקלדת נשארת זהה)
+        if not selected:
+            msg = "לא נבחרו יעדים. בחר/י יעדים כדי להציג סיכום."
+        else:
+            names = [f"{c} {logic.flag_for_country(ctr)}" for c, ctr in sorted(selected)]
+            msg = "סיכום יעדים שנבחרו:\n" + "\n".join(f"• {n}" for n in names)
+        km = _build_destinations_block(conn, selected)
+        await q.edit_message_text(msg + "\u2063", reply_markup=km)
+        return
+
+    # ברירת מחדל: רענון המסך
+    text, km = _build_main_screen(conn, context)
+    await q.edit_message_text(text + "\u2063", reply_markup=km)

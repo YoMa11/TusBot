@@ -1,0 +1,109 @@
+from __future__ import annotations
+import sqlite3
+from typing import Optional, Iterable, Tuple, Dict
+
+def get_conn(path: Optional[str] = None) -> sqlite3.Connection:
+    """פתח חיבור ל־SQLite. אם path לא ניתן, נשתמש ב-DB_PATH מה-config."""
+    if path is None:
+        # import כאן כדי להימנע מתלות מעגלית בזמן import
+        import config  # type: ignore
+        path = config.DB_PATH
+    conn = sqlite3.connect(path, timeout=30, check_same_thread=False)
+    conn.row_factory = sqlite3.Row
+    ensure_schema(conn)
+    return conn
+
+def ensure_schema(conn: sqlite3.Connection) -> None:
+    try:
+        with open("schema.sql", "r", encoding="utf-8") as f:
+            sql = f.read()
+        conn.executescript(sql)
+        conn.commit()
+    except FileNotFoundError:
+        # אם אין schema.sql – נוודא לפחות שהטבלה הבסיסית קיימת (תואם למה שיש לך היום)
+        conn.execute(
+            """CREATE TABLE IF NOT EXISTS flights (
+                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 item_id TEXT,
+                 selapp_item TEXT,
+                 destination TEXT,
+                 city TEXT,
+                 country TEXT,
+                 price REAL,
+                 currency TEXT,
+                 price_raw TEXT,
+                 url TEXT,
+                 img_url TEXT,
+                 last_spots INTEGER,
+                 depart_city TEXT,
+                 depart_time TEXT,
+                 depart_date TEXT,
+                 arrive_city TEXT,
+                 arrive_time TEXT,
+                 arrive_date TEXT,
+                 return_depart_city TEXT,
+                 return_depart_time TEXT,
+                 return_depart_date TEXT,
+                 return_arrive_city TEXT,
+                 return_arrive_time TEXT,
+                 return_arrive_date TEXT,
+                 duration_go TEXT,
+                 duration_back TEXT,
+                 ga_currency TEXT,
+                 ga_brand TEXT,
+                 ga_category TEXT,
+                 ga_category2 TEXT,
+                 ga_category4 TEXT,
+                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                 last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+               )"""
+        )
+        conn.execute(
+            "CREATE UNIQUE INDEX IF NOT EXISTS uq_flights_ids ON flights(item_id, selapp_item)"
+        )
+        conn.commit()
+
+def upsert_items(conn: sqlite3.Connection, items: Iterable[Dict]) -> Tuple[int, int]:
+    """UPSERT באפליקציה (לא תלוי ב-ON CONFLICT מתקדם)."""
+    inserted = updated = 0
+    cur = conn.cursor()
+    for row in items:
+        cur.execute(
+            "UPDATE flights SET last_seen=CURRENT_TIMESTAMP WHERE item_id=? AND selapp_item=?",
+            (row.get("item_id"), row.get("selapp_item"))
+        )
+        before = cur.rowcount
+
+        cols = [
+            "item_id","selapp_item","destination","city","country","price","currency",
+            "price_raw","url","img_url","last_spots",
+            "depart_city","depart_time","depart_date",
+            "arrive_city","arrive_time","arrive_date",
+            "return_depart_city","return_depart_time","return_depart_date",
+            "return_arrive_city","return_arrive_time","return_arrive_date",
+            "duration_go","duration_back","ga_currency","ga_brand","ga_category",
+            "ga_category2","ga_category4"
+        ]
+        placeholders = ",".join(["?"]*len(cols))
+        values = [row.get(c) for c in cols]
+
+        # נסה עדכון; אם לא עודכן – הכנסה
+        set_clause = ",".join([f"{c}=?" for c in cols[2:]]) + \
+                     ", updated_at=CURRENT_TIMESTAMP, last_seen=CURRENT_TIMESTAMP"
+        upd_vals = values[2:] + [row.get("item_id"), row.get("selapp_item")]
+        cur.execute(
+            f"""UPDATE flights SET {set_clause}
+                WHERE item_id=? AND selapp_item=?""",
+            upd_vals
+        )
+        if cur.rowcount == 0:
+            cur.execute(
+                f"INSERT INTO flights ({','.join(cols)}) VALUES ({placeholders})",
+                values
+            )
+            inserted += 1
+        else:
+            updated += 1
+
+    conn.commit()
+    return inserted, updated

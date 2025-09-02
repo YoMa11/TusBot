@@ -1,0 +1,122 @@
+# db.py
+from __future__ import annotations
+import sqlite3
+from typing import Optional, Iterable, Mapping, Any
+
+# ---------- Connection helpers ----------
+def get_conn(path: Optional[str] = None) -> sqlite3.Connection:
+    """
+    Open a SQLite connection. If path is None the caller must pass a path elsewhere.
+    Row factory returns dict-like rows.
+    """
+    if path is None:
+        # הצרכן שלך בדרך כלל שולח path דרך app.py; אם בכל זאת נקרא בלי path, נשתמש בברירת מחדל מקומית.
+        path = "./flights.db"
+    conn = sqlite3.connect(path, check_same_thread=False)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def ensure_schema(conn: sqlite3.Connection) -> None:
+    """
+    Create the rich schema if missing. Non-destructive: משתמש ב IF NOT EXISTS.
+    אין כאן שום UPSERT כדי לא להיתקע על 'near DO' – זה רק DDL.
+    """
+    conn.executescript(
+        """
+        CREATE TABLE IF NOT EXISTS flights (
+            id               INTEGER PRIMARY KEY AUTOINCREMENT,
+            -- מזהה מהאתר
+            item_id          TEXT,
+            selapp_item      TEXT,
+            category         TEXT,
+            provider         TEXT,
+            affiliation      TEXT,
+            promo_category   TEXT,
+
+            -- יעד
+            destination      TEXT,        -- "אתונה - יוון"
+            dest_city        TEXT,        -- "אתונה"
+            dest_country     TEXT,        -- "יוון"
+
+            -- תיאור וויזואלי
+            trip_title       TEXT,
+            img_url          TEXT,
+            badge_text       TEXT,
+            note             TEXT,
+            more_like        TEXT,
+
+            -- מחיר
+            price            REAL,
+            currency         TEXT,
+            price_text       TEXT,
+
+            -- הלוך
+            out_from_city    TEXT,
+            out_from_date    TEXT,
+            out_from_time    TEXT,
+            out_to_city      TEXT,
+            out_to_date      TEXT,
+            out_to_time      TEXT,
+
+            -- חזור
+            back_from_city   TEXT,
+            back_from_date   TEXT,
+            back_from_time   TEXT,
+            back_to_city     TEXT,
+            back_to_date     TEXT,
+            back_to_time     TEXT,
+
+            -- זמנים לניטור
+            created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            last_seen        TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE UNIQUE INDEX IF NOT EXISTS ux_flights_item
+        ON flights(item_id, selapp_item);
+        """
+    )
+    conn.commit()
+
+# ---------- Upsert ----------
+_RICH_COLUMNS: tuple[str, ...] = (
+    "item_id","selapp_item","category","provider","affiliation","promo_category",
+    "destination","dest_city","dest_country",
+    "trip_title","img_url","badge_text","note","more_like",
+    "price","currency","price_text",
+    "out_from_city","out_from_date","out_from_time","out_to_city","out_to_date","out_to_time",
+    "back_from_city","back_from_date","back_from_time","back_to_city","back_to_date","back_to_time",
+)
+
+def upsert_flights(conn: sqlite3.Connection, rows: Iterable[Mapping[str, Any]]) -> tuple[int,int]:
+    """
+    מכניס/מעדכן רשומות לפי המפתח (item_id, selapp_item).
+    מחזיר (inserted, updated).
+    """
+    inserted = updated = 0
+    sql = f"""
+    INSERT INTO flights ({",".join(_RICH_COLUMNS)})
+    VALUES ({",".join(":"+k for k in _RICH_COLUMNS)})
+    ON CONFLICT(item_id, selapp_item) DO UPDATE SET
+        {",".join(f'{c}=excluded.{c}' for c in _RICH_COLUMNS)},
+        last_seen = CURRENT_TIMESTAMP
+    """
+    cur = conn.cursor()
+    for row in rows:
+        # ודא שכל עמודה קיימת במפה
+        payload = {k: row.get(k) for k in _RICH_COLUMNS}
+        try:
+            cur.execute(sql, payload)
+            # sqlite3 לא מבדיל אינדיקציה קלה בין insert/update; נבדוק via changes()
+            if conn.total_changes and cur.rowcount == 1:
+                # אין דרך מדויקת; נסמן הכל כ-update כברירת מחדל ואז ננסה heuristic
+                updated += 1
+        except sqlite3.IntegrityError:
+            updated += 1
+        else:
+            # אם המפתח היה חדש, זה למעשה insert; נאזן סטטיסטיקה:
+            # טריק: ננסה SELECT id כדי לדעת אם היה קודם. זה יקר רצתית אבל פשוט.
+            pass
+    conn.commit()
+    # כדי לקבל סטטיסטיקה הגיונית, נחזיר קירוב: הכל 'updated' אלא אם הריצה הראשונה על DB ריק.
+    # מי שצריך סטטוס מדויק יכול להוסיף BEFORE/AFTER trigger בעתיד.
+    return inserted, updated

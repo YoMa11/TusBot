@@ -1,0 +1,176 @@
+# handlers.py
+from __future__ import annotations
+from typing import Dict, Any, Tuple, List, Optional
+from datetime import date, datetime, timezone, timedelta
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ContextTypes
+import db
+import logic
+import telegram_view as tv
+
+# ===== In-memory UI state per chat =====
+_STATE: Dict[int, Dict[str, Any]] = {}
+
+def _get_state(chat_id: int) -> Dict[str, Any]:
+    st = _STATE.get(chat_id)
+    if st is None:
+        st = {
+            "destinations": set(),   # set of city names, empty -> all
+            "date_mode": "none",     # none|exact|plusminus
+            "date_exact": None,      # YYYY-MM-DD
+            "min_seats": 5,          # default 5 if unknown
+            "visibility": "active",  # active|new|removed
+            "page": 0,
+        }
+        _STATE[chat_id] = st
+    return st
+
+def _state_line(st: Dict[str, Any]) -> str:
+    parts = []
+    if not st["destinations"] or "*" in st["destinations"]:
+        parts.append("כל היעדים")
+    else:
+        parts.append("יעד: " + ", ".join(sorted(st["destinations"]))[:40])
+    dm = st["date_mode"]
+    if dm == "none":
+        parts.append("ללא תאריך")
+    elif dm == "exact" and st["date_exact"]:
+        parts.append(f"תאריך: {st['date_exact']}")
+    elif dm == "plusminus" and st["date_exact"]:
+        parts.append(f"תאריך ±3: {st['date_exact']}")
+    parts.append(f"מושבים מינ׳: {st['min_seats']}")
+    vis_map = {"active":"קיימות","new":"חדשות","removed":"ירדו"}
+    parts.append(f"נראות: {vis_map.get(st['visibility'],'קיימות')}")
+    return " | ".join(parts)
+
+def _dates_for_ui() -> List[date]:
+    today = date.today()
+    return [today + timedelta(days=i) for i in range(0, 7)]
+
+def _build_dest_block(conn, st: Dict[str, Any]) -> List[List[InlineKeyboardButton]]:
+    options: List[Tuple[str, str, bool]] = []
+    # "All destinations"
+    options.append(("כל היעדים 🌍", "dst:*", (not st["destinations"] or "*" in st["destinations"])))
+    for city, cur, price in logic.list_destinations(conn, limit=10):
+        selected = (city in st["destinations"]) and "*" not in st["destinations"]
+        price_str = tv._fmt_price(cur or "", price)  # use helper
+        label = f"{city}" if not price_str else f"{city} · {price_str}"
+        options.append((label, f"dst:{city}", selected))
+    return tv.build_destinations_row(options)
+
+def _build_dates_block(st: Dict[str, Any]) -> List[List[InlineKeyboardButton]]:
+    dates = _dates_for_ui()
+    date_labels: List[Tuple[str, str, bool]] = []
+    # first chip is "ללא"
+    no_sel = (st["date_mode"] == "none")
+    date_labels.append(("ללא ✅" if no_sel else "ללא", "date:none", no_sel))
+    # actual dates (format dd/mm)
+    for d in dates:
+        dd = d.strftime("%d/%m")
+        selected = (st["date_exact"] == d.isoformat()) and (st["date_mode"] != "none")
+        date_labels.append((dd, f"date:{d.isoformat()}", selected))
+    # modes
+    modes = [
+        ("מדויק", "datemode:exact", st["date_mode"] == "exact"),
+        ("ימים ±3", "datemode:plusminus", st["date_mode"] == "plusminus"),
+    ]
+    return tv.build_dates_block(date_labels, modes)
+
+def _build_seats_block(st: Dict[str, Any]) -> List[List[InlineKeyboardButton]]:
+    vals = []
+    for n in [1,2,3,4,5]:
+        vals.append((str(n), f"seats:{n}", st["min_seats"] == n))
+    return tv.build_seats_row(vals)
+
+def _build_visibility_block(st: Dict[str, Any]) -> List[List[InlineKeyboardButton]]:
+    vals = [
+        ("חדשות 🆕", "vis:new", st["visibility"]=="new"),
+        ("קיימות ✅", "vis:active", st["visibility"]=="active"),
+        ("ירדו ⛔️", "vis:removed", st["visibility"]=="removed"),
+    ]
+    return tv.build_visibility_row(vals)
+
+def _build_main_screen(conn, st: Dict[str, Any]) -> Tuple[str, InlineKeyboardMarkup]:
+    # header
+    total_active, total_all = logic.count_totals(conn)
+    text = tv.build_header_text(total_active, total_all, _state_line(st))
+    # blocks
+    blocks: List[List[List[InlineKeyboardButton]]] = []
+    blocks.append(_build_dest_block(conn, st))
+    blocks.append(_build_dates_block(st))
+    blocks.append(_build_seats_block(st))
+    blocks.append(_build_visibility_block(st))
+    # footer
+    blocks.append(tv.build_footer_row())
+    km = tv.build_keyboard(blocks)
+    return text, km
+
+async def handle_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    chat_id = update.effective_chat.id
+    st = _get_state(chat_id)
+    conn = db.get_conn()
+    text, km = _build_main_screen(conn, st)
+    await update.effective_message.reply_text(text, reply_markup=km)
+
+def _toggle_dest(st: Dict[str, Any], city: str) -> None:
+    if city == "*":
+        st["destinations"] = {"*"}
+        return
+    if "*" in st["destinations"]:
+        st["destinations"].remove("*")
+    if city in st["destinations"]:
+        st["destinations"].remove(city)
+    else:
+        st["destinations"].add(city)
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    q = update.callback_query
+    await q.answer()
+    data = (q.data or "")
+    chat_id = update.effective_chat.id
+    st = _get_state(chat_id)
+
+    if data.startswith("dst:"):
+        city = data.split(":",1)[1]
+        _toggle_dest(st, city)
+    elif data.startswith("date:"):
+        v = data.split(":",1)[1]
+        if v == "none":
+            st["date_mode"] = "none"; st["date_exact"] = None
+        else:
+            st["date_exact"] = v
+            if st["date_mode"] == "none":
+                st["date_mode"] = "exact"
+    elif data.startswith("datemode:"):
+        st["date_mode"] = data.split(":",1)[1]
+    elif data.startswith("seats:"):
+        st["min_seats"] = int(data.split(":",1)[1])
+    elif data.startswith("vis:"):
+        st["visibility"] = data.split(":",1)[1]
+    elif data == "act:summary":
+        conn = db.get_conn()
+        qst = logic.QueryState(
+            destinations=list(st["destinations"]) if st["destinations"] else None,
+            date_mode=st["date_mode"],
+            date_exact=datetime.fromisoformat(st["date_exact"]).date() if st["date_exact"] else None,
+            min_seats=st["min_seats"],
+            visibility=st["visibility"]
+        )
+        counts = logic.counts_by_destination(conn, qst)[:25]
+        if counts:
+            lines = ["📊 סיכום יעדים (Top 25):"]
+            for city, c in counts:
+                lines.append(f"• {city}: {c}")
+            await q.message.reply_text("\n".join(lines))
+        else:
+            await q.message.reply_text("אין תוצאות לתצוגה.")
+    elif data == "act:refresh":
+        pass  # no-op; will re-render
+
+    # re-render
+    conn = db.get_conn()
+    text, km = _build_main_screen(conn, st)
+    old_text = q.message.text or ""
+    if old_text == text:
+        text += "\u2063"  # avoid "Message is not modified"
+    await q.edit_message_text(text, reply_markup=km)

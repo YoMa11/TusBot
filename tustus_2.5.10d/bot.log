@@ -1,0 +1,632 @@
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/app.py", line 33, in <module>
+    from handlers import handle_start, handle_callback  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/handlers.py", line 4
+    from __future__ import annotations
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: from __future__ imports must occur at the beginning of the file
+2025-08-31 01:16:49,550 - INFO - 📝 logging to ./bot.log
+2025-08-31 01:16:49,550 - INFO - 📝 logging to ./bot.log
+2025-08-31 01:16:49,550 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=60s | DB=./flights.db
+2025-08-31 01:16:49,550 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=60s | DB=./flights.db
+2025-08-31 01:16:49,552 - INFO - ✅ DB schema ensured
+2025-08-31 01:16:49,552 - INFO - ✅ DB schema ensured
+2025-08-31 01:16:49,552 - INFO - 🚀 Running V2.5.10a from /Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d (PYTHONPATH=/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d)
+2025-08-31 01:16:49,552 - INFO - 
+2025-08-31 01:16:49,552 - INFO - ✅ DB schema ensured
+2025-08-31 01:16:49,552 - INFO - ✅ DB schema ensured
+2025-08-31 01:16:49,552 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/flights.db
+2025-08-31 01:16:49,552 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/flights.db
+2025-08-31 01:16:49,552 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/flights.db'}
+2025-08-31 01:16:49,552 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/flights.db'}
+2025-08-31 01:16:49,554 - INFO - ✅ DB schema ensured
+2025-08-31 01:16:49,827 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getMe "HTTP/1.1 200 OK"
+2025-08-31 01:16:49,831 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-08-31 01:16:49,831 - INFO - 🗓️ JobQueue repeating task scheduled (interval=60s)
+2025-08-31 01:16:49,831 - INFO - 🗓️ JobQueue repeating task scheduled (interval=60s)
+2025-08-31 01:16:49,901 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/deleteWebhook "HTTP/1.1 200 OK"
+2025-08-31 01:16:49,904 - INFO - Added job "monitor" to job store "default"
+2025-08-31 01:16:49,904 - INFO - Scheduler started
+2025-08-31 01:16:49,904 - INFO - Application started
+2025-08-31 01:16:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:17:50 UTC)" (scheduled at 2025-08-30 22:16:50.829197+00:00)
+2025-08-31 01:16:50,832 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:16:50,836 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:17:50 UTC)" executed successfully
+2025-08-31 01:17:00,138 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:17:10,217 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:17:20,297 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:17:30,376 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:17:40,453 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:17:50,529 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:17:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:18:50 UTC)" (scheduled at 2025-08-30 22:17:50.829197+00:00)
+2025-08-31 01:17:50,831 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:17:50,834 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:18:50 UTC)" executed successfully
+2025-08-31 01:18:00,607 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:10,694 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:11,114 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:11,376 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/sendMessage "HTTP/1.1 200 OK"
+2025-08-31 01:18:15,634 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:15,637 - ERROR - callback error
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/handlers.py", line 772, in handle_callback
+    text = lg.ui_all_flights(app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 328, in ui_all_flights
+    cur.execute("""SELECT origin, dest, depart_time, arrive_time, price, currency, seats, removed
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                   FROM flights
+                   ^^^^^^^^^^^^
+                   ORDER BY depart_time ASC
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+                   LIMIT 20""")
+                   ^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: origin
+2025-08-31 01:18:15,730 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-08-31 01:18:18,914 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:18,923 - ERROR - callback error
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/handlers.py", line 775, in handle_callback
+    text = lg.ui_prices(app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 348, in ui_prices
+    cur.execute("""SELECT DISTINCT price, currency FROM flights WHERE price IS NOT NULL ORDER BY currency, price""")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: currency
+2025-08-31 01:18:19,129 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-08-31 01:18:20,859 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:20,863 - ERROR - callback error
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/handlers.py", line 779, in handle_callback
+    kb = lg.ui_dests_keyboard(app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 366, in ui_dests_keyboard
+    cur.execute("""SELECT DISTINCT dest FROM flights WHERE dest IS NOT NULL ORDER BY dest""")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: dest
+2025-08-31 01:18:20,950 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-08-31 01:18:22,030 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:22,033 - ERROR - callback error
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/handlers.py", line 775, in handle_callback
+    text = lg.ui_prices(app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 348, in ui_prices
+    cur.execute("""SELECT DISTINCT price, currency FROM flights WHERE price IS NOT NULL ORDER BY currency, price""")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: currency
+2025-08-31 01:18:22,124 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-08-31 01:18:22,774 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:22,779 - ERROR - callback error
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/handlers.py", line 772, in handle_callback
+    text = lg.ui_all_flights(app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 328, in ui_all_flights
+    cur.execute("""SELECT origin, dest, depart_time, arrive_time, price, currency, seats, removed
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                   FROM flights
+                   ^^^^^^^^^^^^
+                   ORDER BY depart_time ASC
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+                   LIMIT 20""")
+                   ^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: origin
+2025-08-31 01:18:22,866 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-08-31 01:18:24,021 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:24,030 - ERROR - callback error
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/handlers.py", line 779, in handle_callback
+    kb = lg.ui_dests_keyboard(app)
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 366, in ui_dests_keyboard
+    cur.execute("""SELECT DISTINCT dest FROM flights WHERE dest IS NOT NULL ORDER BY dest""")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: dest
+2025-08-31 01:18:24,127 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/answerCallbackQuery "HTTP/1.1 200 OK"
+2025-08-31 01:18:34,127 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:44,209 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:18:50,833 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:19:50 UTC)" (scheduled at 2025-08-30 22:18:50.829197+00:00)
+2025-08-31 01:18:50,834 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:18:50,836 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:19:50 UTC)" executed successfully
+2025-08-31 01:18:54,289 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:19:04,368 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:19:14,448 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:19:24,527 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:19:34,608 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:19:44,690 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:19:50,838 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:20:50 UTC)" (scheduled at 2025-08-30 22:19:50.829197+00:00)
+2025-08-31 01:19:50,838 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:19:50,840 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:20:50 UTC)" executed successfully
+2025-08-31 01:19:54,771 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:20:04,854 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:20:14,931 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:20:25,014 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:20:35,094 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:20:45,178 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:20:50,834 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:21:50 UTC)" (scheduled at 2025-08-30 22:20:50.829197+00:00)
+2025-08-31 01:20:50,835 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:20:50,839 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:21:50 UTC)" executed successfully
+2025-08-31 01:20:55,258 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:21:05,334 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:21:15,412 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:21:25,488 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:21:35,564 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:21:45,647 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:21:50,839 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:22:50 UTC)" (scheduled at 2025-08-30 22:21:50.829197+00:00)
+2025-08-31 01:21:50,840 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:21:50,842 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:22:50 UTC)" executed successfully
+2025-08-31 01:21:55,727 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:22:05,809 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:22:15,885 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:22:25,965 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:22:36,042 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:22:46,110 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:22:50,830 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:23:50 UTC)" (scheduled at 2025-08-30 22:22:50.829197+00:00)
+2025-08-31 01:22:50,831 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:22:50,836 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:23:50 UTC)" executed successfully
+2025-08-31 01:22:56,178 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:23:06,250 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:23:16,325 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:23:26,399 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:23:36,474 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:23:46,551 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:23:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:24:50 UTC)" (scheduled at 2025-08-30 22:23:50.829197+00:00)
+2025-08-31 01:23:50,832 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:23:50,836 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:24:50 UTC)" executed successfully
+2025-08-31 01:23:56,626 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:24:06,704 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:24:16,782 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:24:26,865 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:24:36,949 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:24:47,032 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:24:50,833 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:25:50 UTC)" (scheduled at 2025-08-30 22:24:50.829197+00:00)
+2025-08-31 01:24:50,835 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:24:50,843 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:25:50 UTC)" executed successfully
+2025-08-31 01:24:57,110 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:25:07,191 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:25:17,271 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:25:27,358 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:25:37,438 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:25:47,519 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:25:50,832 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:26:50 UTC)" (scheduled at 2025-08-30 22:25:50.829197+00:00)
+2025-08-31 01:25:50,833 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:25:50,836 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:26:50 UTC)" executed successfully
+2025-08-31 01:25:57,607 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:26:07,687 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:26:17,767 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:26:27,846 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:26:37,929 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:26:48,018 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:26:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:27:50 UTC)" (scheduled at 2025-08-30 22:26:50.829197+00:00)
+2025-08-31 01:26:50,831 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:26:50,833 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:27:50 UTC)" executed successfully
+2025-08-31 01:26:58,094 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:27:08,170 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:27:18,246 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:27:28,324 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:27:38,401 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:27:48,476 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:27:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:28:50 UTC)" (scheduled at 2025-08-30 22:27:50.829197+00:00)
+2025-08-31 01:27:50,832 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:27:50,834 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:28:50 UTC)" executed successfully
+2025-08-31 01:27:58,557 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:28:08,634 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:28:18,711 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:28:28,789 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:28:38,868 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:28:48,944 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:28:50,830 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:29:50 UTC)" (scheduled at 2025-08-30 22:28:50.829197+00:00)
+2025-08-31 01:28:50,831 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:28:50,833 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:29:50 UTC)" executed successfully
+2025-08-31 01:28:59,022 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:29:09,102 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:29:19,178 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:29:29,255 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:29:39,332 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:29:49,411 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:29:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:30:50 UTC)" (scheduled at 2025-08-30 22:29:50.829197+00:00)
+2025-08-31 01:29:50,831 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:29:50,834 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:30:50 UTC)" executed successfully
+2025-08-31 01:29:59,487 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:30:09,565 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:30:19,644 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:30:29,720 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:30:39,796 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:30:49,871 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:30:50,832 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:31:50 UTC)" (scheduled at 2025-08-30 22:30:50.829197+00:00)
+2025-08-31 01:30:50,832 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:30:50,833 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:31:50 UTC)" executed successfully
+2025-08-31 01:30:59,947 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:31:10,025 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:31:20,104 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:31:30,185 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:31:40,260 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:31:50,340 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:31:50,841 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:32:50 UTC)" (scheduled at 2025-08-30 22:31:50.829197+00:00)
+2025-08-31 01:31:50,842 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:31:50,843 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:32:50 UTC)" executed successfully
+2025-08-31 01:32:00,416 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:32:10,490 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:32:20,567 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:32:30,643 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:32:40,720 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:32:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:33:50 UTC)" (scheduled at 2025-08-30 22:32:50.829197+00:00)
+2025-08-31 01:32:50,833 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:32:50,835 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:33:50 UTC)" executed successfully
+2025-08-31 01:32:50,948 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:33:01,017 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:33:11,086 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:33:21,153 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:33:31,222 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:33:41,292 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:33:50,839 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:34:50 UTC)" (scheduled at 2025-08-30 22:33:50.829197+00:00)
+2025-08-31 01:33:50,840 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:33:50,841 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:34:50 UTC)" executed successfully
+2025-08-31 01:33:51,364 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:34:01,453 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:34:11,521 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:34:21,594 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:34:31,667 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:34:41,745 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:34:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:35:50 UTC)" (scheduled at 2025-08-30 22:34:50.829197+00:00)
+2025-08-31 01:34:50,833 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:34:50,837 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:35:50 UTC)" executed successfully
+2025-08-31 01:34:51,821 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:35:01,890 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:35:11,960 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:35:22,035 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:35:32,103 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:35:42,170 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:35:50,842 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:36:50 UTC)" (scheduled at 2025-08-30 22:35:50.829197+00:00)
+2025-08-31 01:35:50,844 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:35:50,846 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:36:50 UTC)" executed successfully
+2025-08-31 01:35:52,243 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:36:02,320 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:36:12,403 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:36:22,480 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:36:32,552 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:36:42,628 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:36:50,832 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:37:50 UTC)" (scheduled at 2025-08-30 22:36:50.829197+00:00)
+2025-08-31 01:36:50,836 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:36:50,841 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:37:50 UTC)" executed successfully
+2025-08-31 01:36:52,700 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:37:02,775 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:37:12,852 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:37:22,920 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:37:32,990 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:37:43,066 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:37:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:38:50 UTC)" (scheduled at 2025-08-30 22:37:50.829197+00:00)
+2025-08-31 01:37:50,832 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:37:50,833 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:38:50 UTC)" executed successfully
+2025-08-31 01:37:53,143 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:38:03,210 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:38:13,277 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:38:23,347 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:38:33,416 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:38:43,484 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:38:50,831 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:39:50 UTC)" (scheduled at 2025-08-30 22:38:50.829197+00:00)
+2025-08-31 01:38:50,832 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:38:50,834 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:39:50 UTC)" executed successfully
+2025-08-31 01:38:53,551 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:39:03,618 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:39:13,691 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:39:23,762 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:39:33,833 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:39:44,080 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:39:50,832 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:40:50 UTC)" (scheduled at 2025-08-30 22:39:50.829197+00:00)
+2025-08-31 01:39:50,834 - ERROR - monitor_job raised
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 382, in run_monitor
+    return await globals()['monitor_job'](conn, app) if callable(globals()['monitor_job']) else None
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10d/logic.py", line 386, in run_monitor
+    return globals()['monitor_job'](conn, app)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+TypeError: monitor_job() takes 1 positional argument but 2 were given
+2025-08-31 01:39:50,837 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 22:40:50 UTC)" executed successfully
+2025-08-31 01:39:54,165 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:40:04,244 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:40:14,326 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:40:18,500 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
+2025-08-31 01:40:18,502 - INFO - Application is stopping. This might take a moment.
+2025-08-31 01:40:18,505 - INFO - Scheduler has been shut down
+2025-08-31 01:40:18,516 - INFO - Application.stop() complete
+2025-08-31 01:40:18,518 - WARNING - bot_data DB attach skipped: name 'app' is not defined

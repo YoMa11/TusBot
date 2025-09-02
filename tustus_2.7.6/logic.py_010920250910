@@ -1,0 +1,131 @@
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Iterable, List, Optional, Sequence, Tuple, Any
+
+import sqlite3
+
+# =========================
+# מצבי שאילתה — כדי למנוע AttributeError
+# =========================
+@dataclass
+class QueryState:
+    # סינון כללי (כולל 'כל היעדים')
+    destinations: Optional[Sequence[str]] = None
+    # תאריכים: exact (רשימה של תאריכים YYYY-MM-DD) / plusminus3 / none
+    date_mode: str = "none"
+    exact_dates: Optional[Sequence[str]] = None
+    # מינימום מושבים (אם חסר מידע — מתייחסים כ-5)
+    seats_min: int = 1
+    # נראות: 'new' / 'active' / 'dropped' / 'any'
+    visibility: str = "any"
+
+# =========================
+# עזרי DB
+# =========================
+def _col_exists(conn: sqlite3.Connection, table: str, col: str) -> bool:
+    row = conn.execute(f"PRAGMA table_info({table})").fetchall()
+    return any(r[1] == col for r in row)
+
+def count_totals(conn: sqlite3.Connection) -> Tuple[int, int]:
+    """
+    מחזיר (סה״כ פעילים, סה״כ כלליים).
+    אם אין עמודת flag 'is_active' — נחזיר את אותו ערך עבור שניהם.
+    """
+    total_all = conn.execute("SELECT COUNT(*) FROM flights").fetchone()[0]
+    if _col_exists(conn, "flights", "is_active"):
+        total_active = conn.execute("SELECT COUNT(*) FROM flights WHERE is_active=1").fetchone()[0]
+    else:
+        total_active = total_all
+    return total_active, total_all
+
+def list_destinations(conn: sqlite3.Connection, limit: Optional[int] = None) -> List[Tuple[str, str, Optional[float]]]:
+    """
+    מחזיר רשימת יעדים: (city, currency, min_price). תומך ב-limit.
+    עובד עם הסכימה העשירה: dest_city, currency, price. אם אין, נופל ל-destination.
+    """
+    has_city = _col_exists(conn, "flights", "dest_city")
+    has_currency = _col_exists(conn, "flights", "currency")
+    price_col = "price" if _col_exists(conn, "flights", "price") else None
+
+    city_expr = "COALESCE(dest_city, destination, '')" if has_city else "COALESCE(destination,'')"
+    cur_expr = "COALESCE(currency,'')" if has_currency else "''"
+
+    # מינימום מחיר לכל עיר
+    if price_col:
+        sql = f"""
+            SELECT {city_expr} AS city,
+                   {cur_expr} AS currency,
+                   MIN({price_col}) AS min_price
+            FROM flights
+            GROUP BY city, currency
+            ORDER BY min_price IS NULL, min_price ASC, city ASC
+        """
+    else:
+        sql = f"""
+            SELECT {city_expr} AS city,
+                   {cur_expr} AS currency,
+                   NULL AS min_price
+            FROM flights
+            GROUP BY city, currency
+            ORDER BY city ASC
+        """
+    if limit:
+        sql += f" LIMIT {int(limit)}"
+    rows = conn.execute(sql).fetchall()
+    return [(r[0], r[1], r[2]) for r in rows]
+
+# -------------------------
+# (אופציונלי) עזרי סיכום נוספים
+# -------------------------
+def list_destinations_all(conn: sqlite3.Connection) -> List[Tuple[str, str, Optional[float]]]:
+    """זהה ל-list_destinations אבל בלי LIMIT — לשימוש בלחצן 'כל היעדים' אם יידרש."""
+    return list_destinations(conn, limit=None)
+
+# --- add to logic.py (minimal, self-contained) ---
+import os
+
+# ... (השארת הייבוא/קוד הקיים שלך ללא שינוי)
+
+_version_cache: str | None = None
+
+def get_version() -> str:
+    """
+    מקור אמת לגרסת הבוט.
+    סדר עדיפויות:
+      1) קובץ VERSION (אם קיים, שורה ראשונה)
+      2) config.SCRIPT_VERSION (אם קיים)
+      3) config.__file_version__ (אם קיים)
+      4) 'unknown'
+    """
+    global _version_cache
+    if _version_cache:
+        return _version_cache
+
+    # 1) קובץ VERSION ליד הקוד
+    try:
+        here = os.path.dirname(os.path.abspath(__file__))
+        ver_path = os.path.join(here, "VERSION")
+        if os.path.exists(ver_path):
+            with open(ver_path, "r", encoding="utf-8") as f:
+                line = (f.readline() or "").strip()
+                if line:
+                    _version_cache = line
+                    return _version_cache
+    except Exception:
+        pass
+
+    # 2/3) מתוך config אם יש
+    try:
+        import config  # טעינה מאוחרת כדי להימנע מתלות מעגלית
+        for attr in ("SCRIPT_VERSION", "__file_version__"):
+            if hasattr(config, attr):
+                val = str(getattr(config, attr) or "").strip()
+                if val:
+                    _version_cache = val
+                    return _version_cache
+    except Exception:
+        pass
+
+    _version_cache = "unknown"
+    return _version_cache
+# --- end add ---

@@ -1,0 +1,229 @@
+# handlers.py
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Iterable, List, Optional, Tuple
+
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ContextTypes
+
+# מודולים פנימיים
+import config  # לא משנה כלום בקובץ הזה, רק קורא ממנו גרסה/נתיב DB אם צריך
+import db
+import logic
+
+
+# ========= מצב בחירה =========
+
+@dataclass
+class SelectedState:
+    """מצב בחירת המשתמש על מסך הבית (יעדים וכו'). נשמר ב-user_data."""
+    destinations: List[str] = field(default_factory=list)
+
+    @classmethod
+    def from_context(cls, context: ContextTypes.DEFAULT_TYPE) -> "SelectedState":
+        raw = context.user_data.get("selected_state")
+        if isinstance(raw, dict):
+            return cls(destinations=list(raw.get("destinations", [])))
+        if isinstance(raw, SelectedState):
+            return raw
+        return cls()
+
+    def save(self, context: ContextTypes.DEFAULT_TYPE) -> None:
+        context.user_data["selected_state"] = {"destinations": list(self.destinations)}
+
+
+# ========= Utilities =========
+
+def _safe_get_conn():
+    """
+    עטיפה שתומכת גם ב-db.get_conn() ללא פרמטר וגם ב-db.get_conn(path).
+    לא נוגעת במימוש אצלך – רק מנסה את שתי האפשרויות.
+    """
+    try:
+        return db.get_conn()  # סוג מימוש אחד שיש אצלך
+    except TypeError:
+        # מימוש ישן/אחר – נקח נתיב מה-config אם יש
+        return db.get_conn(getattr(config, "DB_PATH", "./flights.db"))
+
+
+def _greeting_line(version: str) -> str:
+    """
+    כותרת פתיחה הומוריסטית + גרסה. משתנה קלות לפי השעה (כל שעתיים).
+    לפי בקשתך – בשורת הכותרת מופיעה רק ברכה + גרסה, בלי שום טיסות/סיכומים.
+    """
+    import datetime as _dt
+
+    jokes = [
+        "🚀☕️ תפסנו עוד דיל שממריא מהר יותר מהקפה של הבוקר.",
+        "🛫🧠 אלגוריתם על סטרואידים, מחפש טיסות בזמן שאתה שותה מים.",
+        "✈️🍩 אם יש חור בזמנים, אנחנו נוחתים דרכו לדיל.",
+        "🧳⚡️ הבוט על טורבו – תזהר שלא תתעופף מהספה.",
+        "🌍🔎 זה לא קסם, זה SQL + קצת חוצפה ישראלית.",
+        "🛬🧭 מצאנו מסלול קצר יותר למבצע. תבדוק אותנו.",
+    ]
+    slot = (_dt.datetime.now().hour // 2) % len(jokes)
+    return f"{jokes[slot]}\nvtustus_{version}\u2063"  # \u2063 למניעת 'Message is not modified'
+
+
+def _get_version() -> str:
+    """מנסה להביא גרסה מ-logic.get_version(), אם אין – נופל ל-config.SCRIPT_VERSION או לגרסה מתוך הקובץ."""
+    try:
+        return logic.get_version()  # אם קיים אצלך
+    except Exception:
+        return getattr(config, "SCRIPT_VERSION", getattr(config, "__file_version__", "V2.0"))
+
+
+# ========= בלוק היעדים =========
+
+def _build_dest_block(conn, selected: SelectedState) -> InlineKeyboardMarkup:
+    """
+    רשימת יעדים: עיר + דגל מדינה (ללא מחיר וללא שם המדינה).
+    כולל 'כל היעדים', 'נקה בחירות'. שתי עמודות.
+    """
+    rows: Iterable[Tuple[str, str, object]] = logic.list_all_destinations_with_country(conn)
+    # rows אמורות להחזיר (city, country, …). אנחנו נשתמש רק ב-2 הראשונים.
+    buttons: List[InlineKeyboardButton] = []
+
+    # כל היעדים
+    buttons.append(InlineKeyboardButton("🌍 כל היעדים", callback_data="dst:__ALL__"))
+
+    # איסוף לוגי לקיבוץ לפי מדינה (כדי שיישבו צמוד)
+    # {country: [city, city, ...]}
+    by_country: dict[str, List[str]] = {}
+    for row in rows:
+        # row יכול להיות (city, country) או (city, country, X)
+        if not isinstance(row, (tuple, list)) or len(row) < 2:
+            # דלג אם שורה לא תקינה
+            continue
+        city = (row[0] or "").strip()
+        country = (row[1] or "").strip()
+        if not city:
+            continue
+        by_country.setdefault(country, []).append(city)
+
+    # מיון לפי מדינה ואז לפי עיר
+    for country in sorted(by_country.keys(), key=lambda s: (s or "zzz").lower()):
+        flag = ""
+        try:
+            flag = logic.country_to_flag(country or "")
+        except Exception:
+            flag = ""
+        for city in sorted(by_country[country], key=lambda s: s.lower()):
+            label = f"{flag} {city}".strip()
+            if city in (selected.destinations or []):
+                label = f"✅ {label}"
+            buttons.append(InlineKeyboardButton(label[:60], callback_data=f"dst:{city}"))
+
+    # שתי עמודות
+    keyboard = [buttons[i:i + 2] for i in range(0, len(buttons), 2)]
+    # תחתית פעולות
+    keyboard.append([
+        InlineKeyboardButton("🗑️ נקה בחירות", callback_data="dst:__CLEAR__"),
+        InlineKeyboardButton("רענון 🔄", callback_data="refresh"),
+    ])
+    keyboard.append([
+        InlineKeyboardButton("סיכום יעדים 📊", callback_data="sum"),
+    ])
+    return InlineKeyboardMarkup(keyboard)
+
+
+# ========= מסך ראשי =========
+
+def _build_main_screen(conn, selected: SelectedState) -> tuple[str, InlineKeyboardMarkup]:
+    """המסך הראשי: רק כותרת פתיחה + בלוק היעדים (עיר + דגל)."""
+    greet = _greeting_line(version=_get_version())
+    km = _build_dest_block(conn, selected)
+    return greet, km
+
+
+# ========= Handlers =========
+
+async def handle_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    conn = _safe_get_conn()
+    if conn is None:
+        await update.effective_message.reply_text("DB לא מחובר.")
+        return
+
+    selected = SelectedState.from_context(context)
+    text, km = _build_main_screen(conn, selected)
+    await update.effective_message.reply_text(text, reply_markup=km)
+
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    q = update.callback_query
+    await q.answer()
+    data = (q.data or "").strip()
+
+    conn = _safe_get_conn()
+    if conn is None:
+        await q.edit_message_text("DB לא מחובר.")
+        return
+
+    selected = SelectedState.from_context(context)
+
+    if data == "refresh" or data == "home":
+        text, km = _build_main_screen(conn, selected)
+        # מניעת "Message is not modified"
+        old_text = q.message.text or ""
+        old_km = q.message.reply_markup
+        if old_text == text and str(old_km) == str(km):
+            text += "\u2063"
+        await q.edit_message_text(text, reply_markup=km)
+        return
+
+    if data == "sum":
+        # כאן רק מציגים הודעה זמנית. לוגיקת סיכום מלאה – בקבצים הרלוונטיים אצלך.
+        # אין שינויי DB/logic – משאיר כפי שסיכמנו.
+        text = "📊 סיכום יעדים – יגיע בעדכון הבא (ללא שינויי סכימה)."
+        # להשאיר את אותו מקלדת
+        _, km = _build_main_screen(conn, selected)
+        old_text = q.message.text or ""
+        old_km = q.message.reply_markup
+        if old_text == text and str(old_km) == str(km):
+            text += "\u2063"
+        await q.edit_message_text(text, reply_markup=km)
+        return
+
+    if data.startswith("dst:"):
+        arg = data[4:]
+        if arg == "__ALL__":
+            # בחירת כל היעדים
+            try:
+                rows = logic.list_all_destinations_with_country(conn)
+            except Exception:
+                rows = []
+            all_cities: List[str] = []
+            for row in rows:
+                if isinstance(row, (tuple, list)) and len(row) >= 1:
+                    city = (row[0] or "").strip()
+                    if city:
+                        all_cities.append(city)
+            selected.destinations = sorted(set(all_cities))
+        elif arg == "__CLEAR__":
+            selected.destinations.clear()
+        else:
+            # toggle לעיר ספציפית
+            city = arg.strip()
+            if city:
+                if city in selected.destinations:
+                    selected.destinations.remove(city)
+                else:
+                    selected.destinations.append(city)
+        selected.save(context)
+
+        text, km = _build_main_screen(conn, selected)
+        old_text = q.message.text or ""
+        old_km = q.message.reply_markup
+        if old_text == text and str(old_km) == str(km):
+            text += "\u2063"
+        await q.edit_message_text(text, reply_markup=km)
+        return
+
+    # ברירת מחדל – חזרה למסך ראשי
+    text, km = _build_main_screen(conn, selected)
+    old_text = q.message.text or ""
+    old_km = q.message.reply_markup
+    if old_text == text and str(old_km) == str(km):
+        text += "\u2063"
+    await q.edit_message_text(text, reply_markup=km)

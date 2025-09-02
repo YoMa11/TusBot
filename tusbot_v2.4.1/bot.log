@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/yossimantsour/Desktop/tusbot/tusbot_v2.4.1/app.py", line 11, in <module>
+    from telegram.ext import (
+    ...<5 lines>...
+    )
+ModuleNotFoundError: No module named 'telegram'

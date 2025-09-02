@@ -1,0 +1,24 @@
+[OK] config.py syntax
+[OK] utils.py syntax
+[OK] db.py syntax
+[OK] telegram_view.py syntax
+[OK] handlers.py syntax
+[OK] logic.py syntax
+[OK] app.py syntax
+[OK] botctl.sh syntax
+
+FEATURES_HE_IL.md	165	d50e5351731319ee022b77ce2c9e66f52e446a58c7e6da8dde6b8b307075c13b
+README.md	445	b8fa4f66008890c4cdb9fe5efb3f7f5bf3844f3b6dbf849003bda25cfa9a4d41
+VERSION	3	af3266e6d0f3bba206c2e954c21ff72182e440557702a3f79f4c6bdfb577fed5
+app.py	3172	c5d7bb943e646e53445f6e9c73eec574cadabefb78e4a5480b7933cef5c29b59
+botctl.sh	2212	971fd076d9daaa0d6df86ec6a2860cad6211f4a24da423eea36d5c4cc44901fa
+config.py	438	eecd8647bc69fb7ddc433de61ecae1906fbd9e3cede8bb10c545794fdd0f3ecd
+db.py	1005	26b53b8fe53e8594dd351d9f85518153f57d9a91a1701b7446917bde5a4dfde0
+flights.db	12288	bb32aca692130ed6dbc2e9cab7ab6c4b13a339146705c881f24af6b184889bcc
+handlers.py	1844	eaaae19516ceb44f47e504392b57ae9bd1eae1ecfba846ccd536d0ef1989f64e
+logic.py	1217	1fcac45722deee50c586e54af6615c70f0eb4c3dcd6ffe923dbad4c0bcb9e8f1
+release_notes.txt	142	0f260746b7dbea673743340cf6fab0a2baf5ace885f56e0bcc9dfd0d098f52ba
+requirements.txt	101	fe88de225487e73a2c91b0bde580aec1e8e359b4047ad69c3ad8ea63c9a88ffe
+schema.sql	249	1745795b11811cefcc5e8099ce6cd6cbfc14eaa7e08473fe35c66cadfb9debe9
+telegram_view.py	850	5dfeda320c5b3cb553c9e50c998b021adbb1a161aa3093739fe461da9fd05649
+utils.py	580	9e6f35dbd18533c3f649a0d7a227b34ac67808e2eedea403af0ae77dc841e2d2

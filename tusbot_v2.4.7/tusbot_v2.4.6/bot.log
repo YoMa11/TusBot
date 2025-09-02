@@ -1,0 +1,4 @@
+  File "/Users/yossimantsour/Desktop/tusbot/tusbot_v2.4.7/tusbot_v2.4.6/app.py", line 3
+    from __future__ import annotations
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: from __future__ imports must occur at the beginning of the file

@@ -1,0 +1,79 @@
+# telegram_view.py
+from __future__ import annotations
+from typing import Iterable, List, Sequence, Tuple, Dict, Any, Optional
+from datetime import datetime, timezone
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+
+# Small helpers to keep labels consistent
+
+def _ok(active: bool) -> str:
+    return "✅ " if active else ""
+
+def _fmt_price(cur: str, price: Optional[float]) -> str:
+    if not price:
+        return ""
+    try:
+        iv = int(price)
+    except Exception:
+        return f"{cur}{price}"
+    return f"{cur}{iv}"
+
+def _chunk(seq: Sequence, n: int) -> List[List]:
+    return [list(seq[i:i+n]) for i in range(0, len(seq), n)]
+
+# Greeting text that rotates every ~2 hours deterministically so all users see same text
+_GREETINGS = [
+    "היי, זה טוסטוס. קפה לאורך המסלול עליי. ☕️",
+    "היי, זה טוסטוס. מצאתי כרטיסים – אתה מביא את הבמבה. 🥳",
+    "היי, זה טוסטוס. לאן טסים היום? אני רק שואל בשביל חבר. 😏",
+    "היי, זה טוסטוס. מבצע טוב יותר ממחירי duty free. אולי. 🛍️",
+]
+
+def build_header_text(total_active: int, total_all: int, state_line: str | None = None) -> str:
+    idx = (int(datetime.now(timezone.utc).timestamp()) // (60 * 60 * 2)) % len(_GREETINGS)
+    greeting = _GREETINGS[idx]
+    base = f"{greeting}\nיש כרגע {total_active} מבצעים פעילים (סה\"כ {total_all})."
+    if state_line:
+        base += f"\nבחירות: {state_line}"
+    return base
+
+def build_destinations_row(options: Sequence[Tuple[str, str, bool]]) -> List[List[InlineKeyboardButton]]:
+    """options: list of (label, callback_data, selected?)"""
+    buttons = [
+        InlineKeyboardButton(_ok(sel) + label, callback_data=data)
+        for (label, data, sel) in options
+    ]
+    return _chunk(buttons, 2)
+
+def build_dates_block(date_labels: Sequence[Tuple[str, str, bool]], mode_labels: Sequence[Tuple[str, str, bool]]) -> List[List[InlineKeyboardButton]]:
+    # first row: "בלי תאריך" centered between two fillers if needed
+    date_buttons = [InlineKeyboardButton(_ok(sel)+label, callback_data=data) for (label, data, sel) in date_labels]
+    rows: List[List[InlineKeyboardButton]] = []
+    rows.append(_chunk(date_buttons[:8], 4)[0] if len(date_buttons) >= 4 else [*date_buttons])
+    # modes row
+    mode_buttons = [InlineKeyboardButton(_ok(sel)+label, callback_data=data) for (label, data, sel) in mode_labels]
+    rows.append(mode_buttons)
+    return rows
+
+def build_seats_row(values: Sequence[Tuple[str, str, bool]]) -> List[List[InlineKeyboardButton]]:
+    btns = [InlineKeyboardButton(_ok(sel)+label, callback_data=data) for (label, data, sel) in values]
+    return [_chunk(btns, 5)[0] if len(btns) >= 5 else btns]
+
+def build_visibility_row(values: Sequence[Tuple[str, str, bool]]) -> List[List[InlineKeyboardButton]]:
+    btns = [InlineKeyboardButton(_ok(sel)+label, callback_data=data) for (label, data, sel) in values]
+    return [_chunk(btns, 3)[0] if len(btns) >= 3 else btns]
+
+def build_footer_row() -> List[List[InlineKeyboardButton]]:
+    return [
+        [
+            InlineKeyboardButton("🔄 רענון", callback_data="act:refresh"),
+            InlineKeyboardButton("📊 סיכום יעדים", callback_data="act:summary"),
+        ]
+    ]
+
+def build_keyboard(blocks: List[List[List[InlineKeyboardButton]]]) -> InlineKeyboardMarkup:
+    # flatten list of blocks (each block is list of rows)
+    rows: List[List[InlineKeyboardButton]] = []
+    for block in blocks:
+        rows.extend(block)
+    return InlineKeyboardMarkup(rows)

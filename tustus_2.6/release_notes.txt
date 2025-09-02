@@ -1,0 +1,5 @@
+Tustus 2.6
+- Refactor monitor & JobQueue (יחיד).
+- Inline main menu (אופציה 1).
+- No currency conversion.
+- Syntax checks on setup.

@@ -1,0 +1,151 @@
+from __future__ import annotations
+from typing import Tuple
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ContextTypes
+import sqlite3
+import db
+
+# ===== UI helpers =====
+def _dest_options(conn: sqlite3.Connection, limit: int = 20) -> list[str]:
+    rows = conn.execute("""
+        SELECT DISTINCT COALESCE(dest_city, destination, '') AS dest
+        FROM flights
+        WHERE dest_city IS NOT NULL AND dest_city <> ''
+        ORDER BY dest COLLATE NOCASE
+        LIMIT ?
+    """, (limit,)).fetchall()
+    return [r["dest"] for r in rows]
+
+def _build_main_menu(conn) -> InlineKeyboardMarkup:
+    # כפתורים של יעדים + מחיר מייצג (הכי זול פעיל)
+    rows = conn.execute("""
+        SELECT
+            COALESCE(dest_city, destination, 'לא ידוע') AS dest,
+            COALESCE(currency,'') AS cur,
+            MIN(CASE WHEN is_active=1 AND price IS NOT NULL THEN price END) AS min_price
+        FROM flights
+        GROUP BY COALESCE(dest_city, destination)
+        ORDER BY dest COLLATE NOCASE
+        LIMIT 24
+    """).fetchall()
+
+    buttons = []
+    # כפתור "כל היעדים"
+    buttons.append(InlineKeyboardButton("🌍 כל היעדים", callback_data="dst:*"))
+
+    for r in rows:
+        price_disp = ""
+        if r["min_price"] is not None:
+            try:
+                price_disp = f"{r['cur']}{int(r['min_price'])}"
+            except Exception:
+                price_disp = f"{r['cur']}{r['min_price']}"
+        label = (r["dest"] or "לא ידוע")
+        if price_disp:
+            label = f"{label} · {price_disp}"
+        buttons.append(InlineKeyboardButton(label[:60], callback_data=f"dst:{r['dest'] or ''}"))
+
+    # שתי עמודות
+    keyboard = [buttons[i:i+2] for i in range(0, len(buttons), 2)]
+    # שורת פעולות תחתונה
+    keyboard.append([
+        InlineKeyboardButton("🔄 רענון", callback_data="refresh"),
+        InlineKeyboardButton("📋 עוד יעדים", callback_data="more")
+    ])
+    return InlineKeyboardMarkup(keyboard)
+
+async def _render_summary(context: ContextTypes.DEFAULT_TYPE) -> Tuple[str, InlineKeyboardMarkup]:
+    conn = db.get_conn()  # לא מחייב path – המשכיות למה שסיכמנו
+    count_active = conn.execute("SELECT COUNT(*) AS c FROM flights WHERE is_active=1;").fetchone()["c"]
+    count_all = conn.execute("SELECT COUNT(*) AS c FROM flights;").fetchone()["c"]
+    text = f"✈️ יש כרגע {count_active} מבצעים פעילים ({count_all} בסה\"כ). בחר יעד:"
+    return text, _build_main_menu(conn)
+
+# ===== Handlers =====
+async def handle_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    text, km = await _render_summary(context)
+    await update.effective_message.reply_text(text, reply_markup=km)
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    q = update.callback_query
+    await q.answer()
+    data = (q.data or "").strip()
+
+    if data == "refresh" or data == "home":
+        text, km = await _render_summary(context)
+        old_text = q.message.text or ""
+        old_km = q.message.reply_markup
+        if old_text == text and str(old_km) == str(km):
+            text += "\u2063"  # תו בלתי־נראה כדי למנוע "Message is not modified"
+        await q.edit_message_text(text, reply_markup=km)
+        return
+
+    if data == "more":
+        # מציג עוד יעדים (רק תוספת טכנית — אפשר לשפר בהמשך)
+        conn = db.get_conn()
+        dests = _dest_options(conn, limit=40)
+        buttons = [InlineKeyboardButton(d[:60], callback_data=f"dst:{d}") for d in dests]
+        buttons.insert(0, InlineKeyboardButton("🌍 כל היעדים", callback_data="dst:*"))
+        keyboard = [buttons[i:i+2] for i in range(0, len(buttons), 2)]
+        keyboard.append([InlineKeyboardButton("🏠 בית", callback_data="home")])
+        km = InlineKeyboardMarkup(keyboard)
+        text = "בחר יעד:"
+        old_text = q.message.text or ""
+        old_km = q.message.reply_markup
+        if old_text == text and str(old_km) == str(km):
+            text += "\u2063"
+        await q.edit_message_text(text, reply_markup=km)
+        return
+
+    if data.startswith("dst:"):
+        dst = data[4:]
+        conn = db.get_conn()
+        if dst == "*":
+            rows = conn.execute("""
+                SELECT COALESCE(dest_city, destination, '') AS dest,
+                       COALESCE(currency,'') AS cur,
+                       COALESCE(price,0) AS price,
+                       is_active
+                FROM flights
+                WHERE price IS NOT NULL
+                ORDER BY is_active DESC, price ASC
+                LIMIT 30
+            """).fetchall()
+            lines = ["🌍 כל היעדים (30 זולים ראשונים):"]
+            for r in rows:
+                price_disp = f"{r['cur']}{int(r['price']) if r['price'] else ''}"
+                badge = "✅" if r["is_active"] else "⌛"
+                lines.append(f"{badge} {r['dest']} · {price_disp}")
+            text = "\n".join(lines)
+        else:
+            rows = conn.execute("""
+                SELECT COALESCE(currency,'') AS cur, COALESCE(price,0) AS price, is_active
+                FROM flights WHERE COALESCE(dest_city, destination, '')=?
+                ORDER BY is_active DESC, price ASC
+                LIMIT 10
+            """, (dst,)).fetchall()
+            if rows:
+                lines = [f"יעדים עבור {dst}:"]
+                for o in rows:
+                    price_disp = f"{o['cur']}{int(o['price']) if o['price'] else ''}"
+                    badge = "✅" if o["is_active"] else "⌛"
+                    lines.append(f"{badge} {price_disp}")
+                text = "\n".join(lines)
+            else:
+                text = f"אין כרגע הצעות ל{dst}"
+
+        km = _build_main_menu(conn)
+        old_text = q.message.text or ""
+        old_km = q.message.reply_markup
+        if old_text == text and str(old_km) == str(km):
+            text += "\u2063"
+        await q.edit_message_text(text, reply_markup=km)
+        return
+
+    # ברירת מחדל: חזרה לתפריט
+    text, km = await _render_summary(context)
+    old_text = q.message.text or ""
+    old_km = q.message.reply_markup
+    if old_text == text and str(old_km) == str(km):
+        text += "\u2063"
+    await q.edit_message_text(text, reply_markup=km)

@@ -1,0 +1,30 @@
+2025-08-30 23:37:44,395 - INFO - 📝 logging to ./bot.log
+2025-08-30 23:37:44,395 - INFO - 📝 logging to ./bot.log
+2025-08-30 23:37:44,395 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=60s | DB=./flights.db
+2025-08-30 23:37:44,395 - INFO - 🚀 הפעלה (גרסה V5.1.0 / v1.0.32) | interval=60s | DB=./flights.db
+2025-08-30 23:37:44,396 - INFO - ✅ DB schema ensured
+2025-08-30 23:37:44,396 - INFO - ✅ DB schema ensured
+2025-08-30 23:37:44,396 - INFO - 🚀 Running V2.5.10a from /Users/yossimantsour/Desktop/tusbot/tustus_2.5.10a (PYTHONPATH=/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10a)
+2025-08-30 23:37:44,396 - INFO - 
+2025-08-30 23:37:44,396 - INFO - ✅ DB schema ensured
+2025-08-30 23:37:44,396 - INFO - ✅ DB schema ensured
+2025-08-30 23:37:44,396 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tustus_2.5.10a/flights.db
+2025-08-30 23:37:44,396 - INFO - 📁 DB path: /Users/yossimantsour/Desktop/tusbot/tustus_2.5.10a/flights.db
+2025-08-30 23:37:44,396 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10a/flights.db'}
+2025-08-30 23:37:44,396 - INFO - 🔎 DB attached: {'seq': 0, 'name': 'main', 'file': '/Users/yossimantsour/Desktop/tusbot/tustus_2.5.10a/flights.db'}
+2025-08-30 23:37:44,397 - INFO - ✅ DB schema ensured
+2025-08-30 23:37:44,628 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getMe "HTTP/1.1 200 OK"
+2025-08-30 23:37:44,630 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-08-30 23:37:44,630 - INFO - 🗓️ JobQueue repeating task scheduled (interval=60s)
+2025-08-30 23:37:44,630 - INFO - 🗓️ JobQueue repeating task scheduled (interval=60s)
+2025-08-30 23:37:44,697 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/deleteWebhook "HTTP/1.1 200 OK"
+2025-08-30 23:37:44,700 - INFO - Added job "monitor" to job store "default"
+2025-08-30 23:37:44,700 - INFO - Scheduler started
+2025-08-30 23:37:44,700 - INFO - Application started
+2025-08-30 23:37:45,631 - INFO - Running job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 20:38:45 UTC)" (scheduled at 2025-08-30 20:37:45.629596+00:00)
+2025-08-30 23:37:48,326 - INFO - show_item cards parsed: 66
+2025-08-30 23:37:48,326 - INFO - show_item cards parsed: 66
+2025-08-30 23:37:48,333 - INFO - DB upsert (show_item): inserted=34, updated=32
+2025-08-30 23:37:48,333 - INFO - DB upsert (show_item): inserted=34, updated=32
+2025-08-30 23:37:48,334 - INFO - Job "monitor (trigger: interval[0:01:00], next run at: 2025-08-30 20:38:45 UTC)" executed successfully
+2025-08-30 23:37:54,920 - INFO - HTTP Request: POST https://api.telegram.org/bot8355167350:AAFHXoKgOR7Ja0NOncn2_9PY0hp3Kn4tNBo/getUpdates "HTTP/1.1 200 OK"
